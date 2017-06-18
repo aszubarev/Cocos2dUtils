@@ -106,7 +106,6 @@ proj.*
 cocos2d/
 Classes/
 Resources/
-CMakeLists.txt
 
 
 # Ignore files build by Visual Studio
