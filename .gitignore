@@ -104,6 +104,8 @@ Thumbs.db
 proj.*
 .cocos-project.json
 cocos2d/
+Classes/
+Resources/
 
 
 # Ignore files build by Visual Studio
