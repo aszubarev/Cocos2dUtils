@@ -139,7 +139,7 @@ set(GAME_SRC
     )
 
 set(GAME_HEADERS
-    Classes/AppDelegate.h    
+    Classes/AppDelegate.h
     Classes/HelloWorldScene.h
 
     ImageUtils/ImageUtils.h
