@@ -16,19 +16,19 @@ Add  to {PROJECT_ROOT}/CmakeList.txt variable "COCOS2d_UTILS_ROOT":
     
 Copy next headers paths into set(GAME_HEADERS path1 path2 ...):
     
-    {COCOS2d_UTILS_ROOT}/ImageUtils/ImageUtils.h
-    {COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.h
-    {COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.h
+    ${COCOS2d_UTILS_ROOT}/ImageUtils/ImageUtils.h
+    ${COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.h
+    ${COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.h
     
 Copy next sources paths into set(GAME_SRC path1 path2 ...):
 
-    {COCOS2d_UTILS_ROOT}/ImageUtils/ImageUtils.cpp
-    {COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.cpp
-    {COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/ImageUtils/ImageUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.cpp
     
 Add to {PROJECT_ROOT}/CmakeList.txt in "include_directoriese" path:
   
-    include_directories({COCOS2d_UTILS_ROOT})
+    include_directories(${COCOS2d_UTILS_ROOT})
     
     
   
