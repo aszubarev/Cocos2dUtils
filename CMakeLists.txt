@@ -118,7 +118,7 @@ include_directories(
     ${COCOS2D_ROOT}/cocos
     ${COCOS2D_ROOT}/cocos/platform
     ${COCOS2D_ROOT}/cocos/audio/include/
-    Classes
+        Tests
     )
 if ( WIN32 )
     include_directories(
@@ -128,8 +128,8 @@ if ( WIN32 )
 endif( WIN32 )
 
 set(GAME_SRC
-    Classes/AppDelegate.cpp
-    Classes/HelloWorldScene.cpp
+        Tests/AppDelegate.cpp
+        Tests/TestScene.cpp
 
     ImageUtils/ImageUtils.cpp
     PhysicsBodyUtils/PhysicsBodyUtils.cpp
@@ -139,8 +139,8 @@ set(GAME_SRC
     )
 
 set(GAME_HEADERS
-    Classes/AppDelegate.h
-    Classes/HelloWorldScene.h
+        Tests/AppDelegate.h
+        Tests/TestScene.h
 
     ImageUtils/ImageUtils.h
     PhysicsBodyUtils/PhysicsBodyUtils.h
