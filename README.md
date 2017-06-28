@@ -10,7 +10,7 @@ Update submodule by command:
 
     git submodule update --init --force --remote --recursive
 
-Add  to {PROJECT_ROOT}/CmakeList.txt variable "COCOS2d_UTILS_ROOT":
+Add to your CmakeList.txt variable "COCOS2d_UTILS_ROOT":
     
     set(COCOS2d_UTILS_ROOT ${CMAKE_SOURCE_DIR}/Cocos2dUtils)
     
@@ -26,7 +26,7 @@ Copy next sources paths into set(GAME_SRC path1 path2 ...):
     ${COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.cpp
     ${COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.cpp
     
-Add to {PROJECT_ROOT}/CmakeList.txt in "include_directoriese" path:
+Add to your CmakeList.txt:
   
     include_directories(${COCOS2d_UTILS_ROOT})
     
