@@ -128,27 +128,28 @@ if ( WIN32 )
 endif( WIN32 )
 
 set(GAME_SRC
-        Tests/AppDelegate.cpp
-        Tests/TestScene.cpp
+    Tests/AppDelegate.cpp
+    Tests/TestScene.cpp
 
     ImageUtils/ImageUtils.cpp
     PhysicsBodyUtils/PhysicsBodyUtils.cpp
     SpriteUtils/SpriteUtils.cpp
+    AnimateUtils/AnimateUtils.cpp
 
     ${PLATFORM_SPECIFIC_SRC}
     )
 
 set(GAME_HEADERS
-        Tests/AppDelegate.h
-        Tests/TestScene.h
+    Tests/AppDelegate.h
+    Tests/TestScene.h
 
     ImageUtils/ImageUtils.h
     PhysicsBodyUtils/PhysicsBodyUtils.h
     SpriteUtils/SpriteUtils.h
-
+    AnimateUtils/AnimateUtils.h
 
     ${PLATFORM_SPECIFIC_HEADERS}
-)
+    )
 
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
