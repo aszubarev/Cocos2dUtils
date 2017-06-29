@@ -11,8 +11,8 @@ Animate *AnimateUtils::createAnimate(std::string &path, std::string &pattern,
     Vector<SpriteFrame *> sprite_frames = std::move(AnimateUtils::createVectorSpriteFrames(path, pattern, format,
                                                                                            numb_anim_frames));
 
-    Animation *Animation = Animation::createWithSpriteFrames(sprite_frames, delay);
-    return Animate::create(Animation);
+    Animation *animation = Animation::createWithSpriteFrames(sprite_frames, delay);
+    return Animate::create(animation);
 }
 
 std::string AnimateUtils::createFileName(std::string &path, std::string &pattern,
