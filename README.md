@@ -1,8 +1,9 @@
+# Cocos2dUtils
+
+
 [![Travis](https://img.shields.io/badge/cocos2d-v3.14.1-blue.svg?style=flat&maxAge=2592000)]()
 [![Cocos2d](https://img.shields.io/travis/rust-lang/rust.svg?style=flat)]()
 [![Issue Count](https://codeclimate.com/github/ZubAnt/Cocos2dUtils/badges/issue_count.svg)](https://codeclimate.com/github/ZubAnt/Cocos2dUtils)
-
-# Cocos2dUtils
 
 ### install:
 
