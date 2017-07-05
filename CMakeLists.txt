@@ -26,7 +26,7 @@ cmake_policy(SET CMP0017 NEW)
 
 cmake_minimum_required(VERSION 3.1)
 
-set(APP_NAME MyGame)
+set(APP_NAME Cocos2dUtils)
 project (${APP_NAME})
 
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
@@ -118,12 +118,38 @@ include_directories(
   ${COCOS2D_ROOT}/cocos
   ${COCOS2D_ROOT}/cocos/platform
   ${COCOS2D_ROOT}/cocos/audio/include/
+
+        ${COCOS2D_ROOT}/cocos/2d
+        ${COCOS2D_ROOT}/cocos/2d/renderer
+        ${COCOS2D_ROOT}/cocos/2d/platform
+        ${COCOS2D_ROOT}/cocos/2d/platform/desktop
+        ${COCOS2D_ROOT}/cocos/2d/platform/linux
+        ${COCOS2D_ROOT}/cocos/base
+        ${COCOS2D_ROOT}/cocos/physics
+        ${COCOS2D_ROOT}/cocos/editor-support
+        ${COCOS2D_ROOT}/cocos/math/kazmath
+        ${COCOS2D_ROOT}/extensions
+        ${COCOS2D_ROOT}/external
+        ${COCOS2D_ROOT}/external/edtaa3func
+        ${COCOS2D_ROOT}/external/jpeg/include/linux
+        ${COCOS2D_ROOT}/external/tiff/include/linux
+        ${COCOS2D_ROOT}/external/webp/include/linux
+        ${COCOS2D_ROOT}/external/tinyxml2
+        ${COCOS2D_ROOT}/external/unzip
+        ${COCOS2D_ROOT}/external/chipmunk/include/chipmunk
+        ${COCOS2D_ROOT}/external/freetype2/include/linux
+        ${COCOS2D_ROOT}/external/websockets/include/linux
+        ${COCOS2D_ROOT}/external/spidermonkey/include/linux
+        ${COCOS2D_ROOT}/external/linux-specific/fmod/include/${ARCH_DIR}
+        ${COCOS2D_ROOT}/external/xxhash
   Classes
 )
+
 if ( WIN32 )
   include_directories(
   ${COCOS2D_ROOT}/external/glfw3/include/win32
   ${COCOS2D_ROOT}/external/win32-specific/gles/include/OGLES
+
 )
 endif( WIN32 )
 
@@ -136,6 +162,7 @@ set(GAME_SRC
         PhysicsBodyUtils/PhysicsBodyUtils.cpp
         SpriteUtils/SpriteUtils.cpp
         AnimateUtils/AnimateUtils.cpp
+        SettingsUtils/SettingsUtils.cpp
 
         sqlite/sqlite3.c
 
@@ -150,9 +177,13 @@ set(GAME_HEADERS
         PhysicsBodyUtils/PhysicsBodyUtils.h
         SpriteUtils/SpriteUtils.h
         AnimateUtils/AnimateUtils.h
+        SettingsUtils/SettingsUtils.h
+
+        sqlite/sqlite3.h
+        sqlite/sqlite3ext.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-        )
+         )
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)

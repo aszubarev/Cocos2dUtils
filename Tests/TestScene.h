@@ -2,10 +2,12 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "../sqlite/sqlite3.h"
 
 class HelloWorld : public cocos2d::Layer
 {
 public:
+    HelloWorld();
     static cocos2d::Scene* createScene();
 
     virtual bool init();
@@ -19,6 +21,10 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+private:
+    sqlite3 *db;
+    char* errorMessage;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
