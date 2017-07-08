@@ -1,5 +1,4 @@
 #include "DataBaseUtils.h"
-#include <iostream>
 
 DataBaseUtils* DataBaseUtils::_instance = nullptr;
 
@@ -7,7 +6,9 @@ DataBaseUtils *DataBaseUtils::getInstance()
 {
     if (_instance != nullptr) { return _instance; }
     _instance = new (std::nothrow) DataBaseUtils();
+    CCASSERT(_instance != nullptr, "The instance should not be nullptr");
     _instance->autorelease();
+    _instance->retain();
 
     return _instance;
 }
@@ -26,7 +27,9 @@ DataBaseUtils::DataBaseUtils():
 }
 
 DataBaseUtils::~DataBaseUtils()
-{}
+{
+    CC_SAFE_RELEASE_NULL(_instance);
+}
 
 DataBaseUtils::DataBaseUtils(const DataBaseUtils &obj)
 {

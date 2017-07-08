@@ -18,8 +18,8 @@ public:
 
 CC_CONSTRUCTOR_ACCESS:
     SettingsUtils();
-    SettingsUtils(const SettingsUtils &obj);
-    SettingsUtils &operator =(const SettingsUtils &obj);
+    SettingsUtils(const SettingsUtils &obj) = delete;
+    SettingsUtils &operator =(const SettingsUtils &obj) = delete;
     ~SettingsUtils();
 
 private:

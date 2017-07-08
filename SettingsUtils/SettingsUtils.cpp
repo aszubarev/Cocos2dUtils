@@ -7,7 +7,9 @@ SettingsUtils* SettingsUtils::getInstance()
 {
     if (_instance != nullptr) { return _instance; }
     _instance = new (std::nothrow) SettingsUtils();
+    CCASSERT(_instance != nullptr, "The instance should not be nullptr");
     _instance->autorelease();
+    _instance->retain();
 
     return _instance;
 }
@@ -20,23 +22,10 @@ SettingsUtils::SettingsUtils():
     deleteLine();
 }
 
-SettingsUtils::SettingsUtils(const SettingsUtils &obj)
-{
-    _dbUtils = obj._dbUtils;
-    _table_name = obj._table_name;
-}
-
-SettingsUtils &SettingsUtils::operator=(const SettingsUtils &obj)
-{
-    _dbUtils = obj._dbUtils;
-    _table_name = obj._table_name;
-
-    return *this;
-}
-
 SettingsUtils::~SettingsUtils()
-{}
-
+{
+    CC_SAFE_RELEASE_NULL(_instance);
+}
 
 void SettingsUtils::insert(int volumeEffect, int volumeSound, int languages, int vibroEnable)
 {
