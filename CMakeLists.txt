@@ -163,8 +163,7 @@ set(GAME_SRC
         SpriteUtils/SpriteUtils.cpp
         AnimateUtils/AnimateUtils.cpp
         SettingsUtils/SettingsUtils.cpp
-
-        sqlite/sqlite3.c
+        DataBaseUtils/DataBaseUtils.cpp
 
         ${PLATFORM_SPECIFIC_SRC}
         )
@@ -178,12 +177,10 @@ set(GAME_HEADERS
         SpriteUtils/SpriteUtils.h
         AnimateUtils/AnimateUtils.h
         SettingsUtils/SettingsUtils.h
-
-        sqlite/sqlite3.h
-        sqlite/sqlite3ext.h
+        DataBaseUtils/DataBaseUtils.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-         )
+        DataBaseUtils/DataBaseUtils.cpp DataBaseUtils/DataBaseUtils.h)
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
@@ -193,7 +190,7 @@ else()
     add_executable(${APP_NAME} ${GAME_SRC} ${GAME_HEADERS})
 endif()
 
-target_link_libraries(${APP_NAME} cocos2d)
+target_link_libraries(${APP_NAME} cocos2d sqlite3)
 
 set(APP_BIN_DIR "${CMAKE_BINARY_DIR}/bin")
 

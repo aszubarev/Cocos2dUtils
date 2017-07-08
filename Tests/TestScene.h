@@ -2,7 +2,8 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-#include "../sqlite/sqlite3.h"
+#include "../cocos2d/external/sqlite3/include/sqlite3.h"
+#include "../SettingsUtils/SettingsUtils.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -23,7 +24,7 @@ public:
     CREATE_FUNC(HelloWorld);
 
 private:
-    sqlite3 *db;
+    SettingsUtils *_settingUtils;
     char* errorMessage;
 };
 
