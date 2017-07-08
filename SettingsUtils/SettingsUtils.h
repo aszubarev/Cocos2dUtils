@@ -4,19 +4,31 @@
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 #include "../DataBaseUtils/DataBaseUtils.h"
 
-class SettingsUtils {
+USING_NS_CC;
+
+class SettingsUtils: Ref
+{
 public:
-    SettingsUtils();
-    static SettingsUtils* create();
+    static SettingsUtils* getInstance();
     void insert(int volumeEffect, int volumeSound, int languages, int vibroEnable);
     void updateOneAtribute(std::string &atribute, int newAmount);
     void updateAllAtributes(int volumeEffect, int volumeSound, int languages, int vibroEnable);
     std::string select(std::string &atribute);
     void deleteLine();
+
+CC_CONSTRUCTOR_ACCESS:
+    SettingsUtils();
+    SettingsUtils(const SettingsUtils &obj);
+    SettingsUtils &operator =(const SettingsUtils &obj);
+    ~SettingsUtils();
+
 private:
+    DataBaseUtils *_dbUtils;
+    std::string _table_name;
+
+    static SettingsUtils *_instance;
+
     void createTable();
-    DataBaseUtils *_dataBaseUtils;
-    sqlite3 *_db;
 };
 
 
