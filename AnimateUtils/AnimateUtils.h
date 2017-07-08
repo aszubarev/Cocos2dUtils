@@ -6,6 +6,7 @@ USING_NS_CC;
 
 class AnimateUtils
 {
+public:
     static Animate* createAnimate(std::string &path, std::string &pattern,
                                   std::string &format, unsigned int numb_anim_frames, float delay = 0.0f);
 
