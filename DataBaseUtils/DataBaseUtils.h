@@ -5,7 +5,7 @@
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 USING_NS_CC;
 
-class DataBaseUtils: Ref
+class DataBaseUtils : public Ref
 {
 public:
     static DataBaseUtils* getInstance();

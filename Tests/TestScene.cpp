@@ -10,7 +10,7 @@ HelloWorld::HelloWorld(): errorMessage()
 
 HelloWorld::~HelloWorld()
 {
-//    CC_SAFE_RELEASE_NULL(_settingUtils);
+    CC_SAFE_RELEASE_NULL(_settingUtils);
 }
 
 
@@ -118,7 +118,7 @@ bool HelloWorld::init()
     this->addChild(sprite, 0);
 
     _settingUtils = SettingsUtils::getInstance();
-//    _settingUtils->retain();
+    _settingUtils->retain();
 
     _settingUtils->setVolumeEffect(23);
     std::cout << _settingUtils->getVolumeEffect();

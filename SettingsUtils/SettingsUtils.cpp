@@ -11,17 +11,17 @@ SettingsUtils* SettingsUtils::getInstance()
 }
 
 SettingsUtils::SettingsUtils():
-        _table_name("AppSettings"), _pk("pk"), _volumeEffect("volumeEffect"),
-        _volumeSound("volumeSound"), _languages("languages"), _vibroEnable("vibroEnable")
+        _atrTableName("AppSettings"), _atrPk("pk"), _atrVolumeEffect("volumeEffect"),
+        _atrVolumeSound("volumeSound"), _atrLanguages("languages"), _atrVibroEnable("vibroEnable")
 {
     _dbUtils = DataBaseUtils::getInstance();
-//    _dbUtils->retain();
+    _dbUtils->retain();
     createTable();
 }
 
 SettingsUtils::~SettingsUtils()
 {
-//    CC_SAFE_RELEASE_NULL(_dbUtils);
+    CC_SAFE_RELEASE_NULL(_dbUtils);
 }
 
 void SettingsUtils::createTable()
@@ -29,10 +29,10 @@ void SettingsUtils::createTable()
     if (_dbUtils->open())
     {
         sqlite3_stmt* stmt;
-        std::string sql = "CREATE TABLE IF NOT EXISTS " + _table_name + "(" +
-                          _pk + " INTEGER PRIMARY KEY, " + _volumeEffect + " INTEGER, " +
-                          _volumeSound + " INTEGER, " + _languages + " INTEGER, " +
-                          _vibroEnable + " INTEGER);";
+        std::string sql = "CREATE TABLE IF NOT EXISTS " + _atrTableName + "(" +
+                _atrPk + " INTEGER PRIMARY KEY, " + _atrVolumeEffect + " INTEGER, " +
+                _atrVolumeSound + " INTEGER, " + _atrLanguages + " INTEGER, " +
+                _atrVibroEnable + " INTEGER);";
 
         if (sqlite3_prepare_v2(_dbUtils->db(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
         {
@@ -55,7 +55,7 @@ void SettingsUtils::insert(int volumeEffect, int volumeSound, int languages, int
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "INSERT INTO " + _table_name + " VALUES(1, ?, ?, ?, ?);";
+    std::string query = "INSERT INTO " + _atrTableName + " VALUES(1, ?, ?, ?, ?);";
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
         sqlite3_bind_int(stmt, 1, volumeEffect);
@@ -82,7 +82,7 @@ void SettingsUtils::deleteLine()
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "delete from " + _table_name +  " where " + _pk + "=1";
+    std::string query = "delete from " + _atrTableName +  " where " + _atrPk + "=1";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -97,11 +97,11 @@ void SettingsUtils::deleteLine()
     _dbUtils->close();
 }
 
-void SettingsUtils::setOneAtribute(std::string &atribute, int newAmount)
+bool SettingsUtils::setOneAtribute(std::string &atribute, int newAmount)
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "UPDATE " + _table_name + " set " + atribute + "=? where " + _pk + "=1;";
+    std::string query = "UPDATE " + _atrTableName + " set " + atribute + "=? where " + _atrPk + "=1;";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -109,88 +109,111 @@ void SettingsUtils::setOneAtribute(std::string &atribute, int newAmount)
         if (sqlite3_step(stmt) != SQLITE_DONE)
         {
             CCLOG("Error in UPDATE 1, %s", sqlite3_errmsg(_dbUtils->db()));
+            return false;
         }
     }
     else
     {
         CCLOG("Error in UPDATE 2, %s", sqlite3_errmsg(_dbUtils->db()));
+        return false;
     }
 
     sqlite3_reset(stmt);
     sqlite3_finalize(stmt);
     _dbUtils->close();
+    return true;
 }
 
-void SettingsUtils::setVolumeEffect(int volumeEffect)
+bool SettingsUtils::setVolumeEffect(int volumeEffect)
 {
     if(volumeEffect < 0)
     {
-        setOneAtribute(_volumeEffect, 0);
+        return setOneAtribute(_atrVolumeEffect, 0);
     }
     else if(volumeEffect > 100)
     {
-        setOneAtribute(_volumeEffect, MAX_VOLUMEEFFECT);
+        return setOneAtribute(_atrVolumeEffect, MAX_VOLUMEEFFECT);
     }
     else
     {
-        setOneAtribute(_volumeEffect, volumeEffect);
+        return setOneAtribute(_atrVolumeEffect, volumeEffect);
     }
 }
 
-void SettingsUtils::setVolumeSound(int volumeSound)
+bool SettingsUtils::setVolumeSound(int volumeSound)
 {
     if(volumeSound < 0)
     {
-        setOneAtribute(_volumeSound, 0);
+        return setOneAtribute(_atrVolumeSound, 0);
     }
     else if(volumeSound > 100)
     {
-        setOneAtribute(_volumeSound, MAX_VOLUMESOUND);
+        return setOneAtribute(_atrVolumeSound, MAX_VOLUMESOUND);
     }
     else
     {
-        setOneAtribute(_volumeSound, volumeSound);
+        return setOneAtribute(_atrVolumeSound, volumeSound);
     }
 }
 
-void SettingsUtils::setLanguages(int languages)
+bool SettingsUtils::setLanguages(int languages)
 {
     if(languages < 0)
     {
-        setOneAtribute(_languages, 0);
+        return setOneAtribute(_atrLanguages, 0);
     }
     else if(languages > 100)
     {
-        setOneAtribute(_languages, MAX_LANGUAGES);
+        return setOneAtribute(_atrLanguages, MAX_LANGUAGES);
     }
     else
     {
-        setOneAtribute(_languages, languages);
+        return setOneAtribute(_atrLanguages, languages);
     }
 }
 
-void SettingsUtils::setVibroEnable(int vibroEnable)
+bool SettingsUtils::setVibroEnable(int vibroEnable)
 {
     if(vibroEnable < 0)
     {
-        setOneAtribute(_vibroEnable, 0);
+        return setOneAtribute(_atrVibroEnable, 0);
     }
     else if(vibroEnable > 100)
     {
-        setOneAtribute(_vibroEnable, MAX_VIBROENABLE);
+        return setOneAtribute(_atrVibroEnable, MAX_VIBROENABLE);
     }
     else
     {
-        setOneAtribute(_vibroEnable, vibroEnable);
+        return setOneAtribute(_atrVibroEnable, vibroEnable);
     }
 }
 
-void SettingsUtils::setAllAtributes(int volumeEffect, int volumeSound, int languages, int vibroEnable)
+bool SettingsUtils::setAllAtributes(int volumeEffect, int volumeSound, int languages, int vibroEnable)
 {
-    setVolumeEffect(volumeEffect);
-    setVolumeSound(volumeSound);
-    setLanguages(languages);
-    setVibroEnable(vibroEnable);
+    bool flag = true;
+    bool result = true;
+
+    flag = setVolumeEffect(volumeEffect);
+    if(flag == false)
+    {
+        result = false;
+    }
+    flag = setVolumeSound(volumeSound);
+    if(flag == false)
+    {
+        result = false;
+    }
+    flag = setLanguages(languages);
+    if(flag == false)
+    {
+        result = false;
+    }
+    flag = setVibroEnable(vibroEnable);
+    if(flag == false)
+    {
+        result = false;
+    }
+    return result;
 }
 
 std::string SettingsUtils::getOneAtribute(std::string &atribute)
@@ -198,7 +221,7 @@ std::string SettingsUtils::getOneAtribute(std::string &atribute)
     _dbUtils->open();
     sqlite3_stmt* stmt;
     std::string result;
-    std::string query = "SELECT " + atribute + " from " + _table_name + " where " + _pk + "=1;";
+    std::string query = "SELECT " + atribute + " from " + _atrTableName + " where " + _atrPk + "=1;";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -224,20 +247,20 @@ std::string SettingsUtils::getOneAtribute(std::string &atribute)
     return result;
 }
 
-std::string SettingsUtils::getVolumeEffect()
+int SettingsUtils::getVolumeEffect()
 {
-    return getOneAtribute(_volumeEffect);
+    return stoi(getOneAtribute(_atrVolumeEffect));
 }
-std::string SettingsUtils::getVolumeSound()
+int SettingsUtils::getVolumeSound()
 {
-    return getOneAtribute(_volumeSound);
+    return stoi(getOneAtribute(_atrVolumeSound));
 }
-std::string SettingsUtils::getLanguages()
+int SettingsUtils::getLanguages()
 {
-    return getOneAtribute(_languages);
+    return stoi(getOneAtribute(_atrLanguages));
 }
 
-std::string SettingsUtils::getVibroEnable()
+int SettingsUtils::getVibroEnable()
 {
-    return getOneAtribute(_vibroEnable);
+    return stoi(getOneAtribute(_atrVibroEnable));
 }

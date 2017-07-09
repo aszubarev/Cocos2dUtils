@@ -14,21 +14,21 @@ USING_NS_CC;
 #define MAX_LANGUAGES 1
 #define MAX_VIBROENABLE 1
 
-class SettingsUtils: Ref
+class SettingsUtils : public Ref
 {
 public:
     static SettingsUtils* getInstance();
 
-    void setAllAtributes(int volumeEffect, int volumeSound, int languages, int vibroEnable);
-    void setVolumeEffect(int volumeEffect);
-    void setVolumeSound(int volumeSound);
-    void setLanguages(int languages);
-    void setVibroEnable(int vibroEnable);
+    bool setAllAtributes(int volumeEffect, int volumeSound, int languages, int vibroEnable);
+    bool setVolumeEffect(int volumeEffect);
+    bool setVolumeSound(int volumeSound);
+    bool setLanguages(int languages);
+    bool setVibroEnable(int vibroEnable);
 
-    std::string getVolumeEffect();
-    std::string getVolumeSound();
-    std::string getLanguages();
-    std::string getVibroEnable();
+    int getVolumeEffect();
+    int getVolumeSound();
+    int getLanguages();
+    int getVibroEnable();
 
     void deleteLine();
 
@@ -40,14 +40,14 @@ CC_CONSTRUCTOR_ACCESS:
 
 private:
     DataBaseUtils *_dbUtils;
-    std::string _table_name;
-    std::string _pk;
-    std::string _volumeEffect;
-    std::string _volumeSound;
-    std::string _languages;
-    std::string _vibroEnable;
+    std::string _atrTableName;
+    std::string _atrPk;
+    std::string _atrVolumeEffect;
+    std::string _atrVolumeSound;
+    std::string _atrLanguages;
+    std::string _atrVibroEnable;
 
-    void setOneAtribute(std::string &atribute, int newAmount);
+    bool setOneAtribute(std::string &atribute, int newAmount);
     std::string getOneAtribute(std::string &atribute);
     void createTable();
     void insert(int volumeEffect, int volumeSound, int languages, int vibroEnable);
