@@ -45,7 +45,7 @@ Vector<SpriteFrame *>AnimateUtils::createVectorSpriteFrames(std::string &path, s
 
     for (unsigned int i = 1; i < numb_anim_frames; ++i)
     {
-        frame_filename = std::move(AnimateUtils::createFileName(path, pattern, format, 1));
+        frame_filename = std::move(AnimateUtils::createFileName(path, pattern, format, i));
         SpriteFrame *frame = SpriteFrame::create(frame_filename,
                                                  Rect(0, 0, image_size.width, image_size.height));
         if (frame == nullptr)
