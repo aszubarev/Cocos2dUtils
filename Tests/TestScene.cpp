@@ -8,6 +8,11 @@ USING_NS_CC;
 HelloWorld::HelloWorld(): errorMessage()
 {}
 
+HelloWorld::~HelloWorld()
+{
+//    CC_SAFE_RELEASE_NULL(_settingUtils);
+}
+
 
 Scene* HelloWorld::createScene()
 {
@@ -112,64 +117,11 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
-    _settingUtils = SettingsUtils::create();
+    _settingUtils = SettingsUtils::getInstance();
+//    _settingUtils->retain();
 
-//    // path for saving db
-//    std::string dbName = "test2.db";
-//    auto filePath = FileUtils::getInstance()->getWritablePath() + dbName;
-//
-//    auto status = sqlite3_open(filePath.c_str(), &db);
-//    if(status != SQLITE_OK)
-//    {
-//        CCLOG("error for opening db.");
-//    }
-//    else
-//    {
-//        CCLOG("open successed!");
-//    }
-//
-//    std::string path = FileUtils::getInstance()->getWritablePath()+"test.sqlite";
-//    std::cout << path;
-
-//    // create table
-//    auto create_table = "create table user (id integer, age integer)";
-//    status = sqlite3_exec(db, create_table, nullptr, nullptr, &errorMessage);
-//    if(status != SQLITE_OK) CCLOG("create: %s", errorMessage);
-//
-//    // insert row
-//    auto insert = "insert into user(id, age) values (1, 15)";
-//    status = sqlite3_exec(db, insert, nullptr, nullptr, &errorMessage);
-//    if(status != SQLITE_OK) CCLOG("insert: %s", errorMessage);
-//
-//    // update row
-//    auto update = "update user set age = 20 where id = 1";
-//    status = sqlite3_exec(db, update, nullptr, nullptr, &errorMessage);
-//    if(status != SQLITE_OK) CCLOG("update: %s", errorMessage);
-//
-//    // select row(s)
-//    sqlite3_stmt* statement = nullptr;
-//    auto select = "select * from user where id = 1";
-//    if(sqlite3_prepare_v2(db, select, -1, &statement, nullptr) != SQLITE_OK) CCLOG("prepare: %s", errorMessage);
-//    else
-//    {
-//        if (sqlite3_step(statement) == SQLITE_ROW)
-//        {
-//            for (int i = 0; i < sqlite3_column_count(statement); i++)
-//            {
-//                std::string name = sqlite3_column_name(statement, i);
-//                int columnType = sqlite3_column_type(statement, i);
-//                if (columnType == SQLITE_INTEGER)
-//                {
-//                    CCLOG("%s = %d", name.c_str(), sqlite3_column_int(statement, i));
-//                    continue;
-//                }
-//            }
-//        }
-//    }
-//    sqlite3_reset(statement);
-//    sqlite3_finalize(statement);
-//
-//    sqlite3_close(db);
+    _settingUtils->setVolumeEffect(23);
+    std::cout << _settingUtils->getVolumeEffect();
     
     return true;
 }
