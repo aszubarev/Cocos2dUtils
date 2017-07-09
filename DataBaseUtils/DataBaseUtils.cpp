@@ -1,16 +1,13 @@
 #include "DataBaseUtils.h"
 
-DataBaseUtils* DataBaseUtils::_instance = nullptr;
+
 
 DataBaseUtils *DataBaseUtils::getInstance()
 {
-    if (_instance != nullptr) { return _instance; }
-    _instance = new (std::nothrow) DataBaseUtils();
-    CCASSERT(_instance != nullptr, "The instance should not be nullptr");
-    _instance->autorelease();
-    _instance->retain();
+    DataBaseUtils* instance = new (std::nothrow) DataBaseUtils();
+    instance->autorelease();
 
-    return _instance;
+    return instance;
 }
 
 DataBaseUtils::DataBaseUtils():
@@ -27,27 +24,7 @@ DataBaseUtils::DataBaseUtils():
 }
 
 DataBaseUtils::~DataBaseUtils()
-{
-    CC_SAFE_RELEASE_NULL(_instance);
-}
-
-DataBaseUtils::DataBaseUtils(const DataBaseUtils &obj)
-{
-    _db_name = obj._db_name;
-    _db_path = obj._db_path;
-    _status_code = obj._status_code;
-    _db = obj._db;
-}
-
-DataBaseUtils &DataBaseUtils::operator=(const DataBaseUtils &obj)
-{
-    _db_name = obj._db_name;
-    _db_path = obj._db_path;
-    _status_code = obj._status_code;
-    _db = obj._db;
-
-    return *this;
-}
+{}
 
 bool DataBaseUtils::open()
 {

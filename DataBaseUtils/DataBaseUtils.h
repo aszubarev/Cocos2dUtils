@@ -20,8 +20,8 @@ public:
 
 CC_CONSTRUCTOR_ACCESS:
     DataBaseUtils();
-    DataBaseUtils(const DataBaseUtils &obj);
-    DataBaseUtils &operator=(const DataBaseUtils &obj);
+    DataBaseUtils(const DataBaseUtils &obj) = delete;
+    DataBaseUtils &operator=(const DataBaseUtils &obj) = delete;
     ~DataBaseUtils();
 
 private:
@@ -29,8 +29,6 @@ private:
     std::string _db_path;
     int _status_code;
     sqlite3 *_db;
-
-    static DataBaseUtils *_instance;
 };
 
 #endif //COCOS2DUTILS_DATABASEUTILS_H

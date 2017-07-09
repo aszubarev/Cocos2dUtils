@@ -26,8 +26,6 @@ private:
     DataBaseUtils *_dbUtils;
     std::string _table_name;
 
-    static SettingsUtils *_instance;
-
     void createTable();
 };
 

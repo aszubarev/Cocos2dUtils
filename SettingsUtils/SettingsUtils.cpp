@@ -1,30 +1,27 @@
 #include "SettingsUtils.h"
 #include <iostream>
 
-SettingsUtils* SettingsUtils::_instance = nullptr;
 
 SettingsUtils* SettingsUtils::getInstance()
 {
-    if (_instance != nullptr) { return _instance; }
-    _instance = new (std::nothrow) SettingsUtils();
-    CCASSERT(_instance != nullptr, "The instance should not be nullptr");
-    _instance->autorelease();
-    _instance->retain();
+    SettingsUtils *instance = new (std::nothrow) SettingsUtils();
+    instance->autorelease();
 
-    return _instance;
+    return instance;
 }
 
 SettingsUtils::SettingsUtils():
         _table_name("AppSettings")
 {
     _dbUtils = DataBaseUtils::getInstance();
+    _dbUtils->retain();
     createTable();
     deleteLine();
 }
 
 SettingsUtils::~SettingsUtils()
 {
-    CC_SAFE_RELEASE_NULL(_instance);
+    CC_SAFE_RELEASE_NULL(_dbUtils);
 }
 
 void SettingsUtils::insert(int volumeEffect, int volumeSound, int languages, int vibroEnable)
