@@ -8,7 +8,7 @@ class AnimateUtils
 {
 public:
     static Animate* createAnimate(std::string &path, std::string &pattern,
-                                  std::string &format, unsigned int numb_anim_frames, float delay = 0.0f);
+                                  std::string &format, unsigned int numb_anim_frames, float delay = 0.5f);
 
     static std::string createFileName(std::string &path, std::string &pattern,
                                       std::string &format, unsigned int number);
