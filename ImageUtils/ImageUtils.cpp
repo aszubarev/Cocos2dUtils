@@ -9,9 +9,6 @@ Size ImageUtils::getSize(const std::string &filename)
     {
         throw std::invalid_argument(prefix_err_create_sprite + filename);
     }
-    Size size = sprite->getContentSize();
 
-    sprite->removeFromParent();
-
-    return size;
+    return sprite->getContentSize();
 }
