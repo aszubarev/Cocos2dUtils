@@ -36,6 +36,17 @@ Copy next sources paths into set(GAME_SRC path1 path2 ...):
 Add to your CmakeList.txt:
   
     include_directories(${COCOS2d_UTILS_ROOT})
+
+Add to your CmakeList.txt:
+SettingsUtils/SettingsUtils.cpp
+DataBaseUtils/DataBaseUtils.cpp
+  
+SettingsUtils/SettingsUtils.h
+DataBaseUtils/DataBaseUtils.h
+
+target_link_libraries(${APP_NAME} cocos2d sqlite3)
+
+
     
     
   

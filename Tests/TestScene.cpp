@@ -5,6 +5,15 @@
 
 USING_NS_CC;
 
+HelloWorld::HelloWorld(): errorMessage()
+{}
+
+HelloWorld::~HelloWorld()
+{
+    CC_SAFE_RELEASE_NULL(_settingUtils);
+}
+
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -107,6 +116,12 @@ bool HelloWorld::init()
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
+
+    _settingUtils = SettingsUtils::getInstance();
+    _settingUtils->retain();
+
+    _settingUtils->setVolumeEffect(23);
+    std::cout << _settingUtils->getVolumeEffect();
     
     return true;
 }
@@ -142,4 +157,5 @@ bool HelloWorld::onContactSeparate(cocos2d::PhysicsContact &contact)
 {
     return false;
 }
+
 
