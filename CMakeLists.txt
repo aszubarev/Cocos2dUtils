@@ -180,7 +180,7 @@ set(GAME_HEADERS
         DataBaseUtils/DataBaseUtils.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-        DataBaseUtils/DataBaseUtils.cpp DataBaseUtils/DataBaseUtils.h)
+        )
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
