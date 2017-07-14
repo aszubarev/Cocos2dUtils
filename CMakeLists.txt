@@ -164,6 +164,7 @@ set(GAME_SRC
         AnimateUtils/AnimateUtils.cpp
         SettingsUtils/SettingsUtils.cpp
         DataBaseUtils/DataBaseUtils.cpp
+        MenuUtils/MenuUtils.cpp
 
         ${PLATFORM_SPECIFIC_SRC}
         )
@@ -178,9 +179,10 @@ set(GAME_HEADERS
         AnimateUtils/AnimateUtils.h
         SettingsUtils/SettingsUtils.h
         DataBaseUtils/DataBaseUtils.h
+        MenuUtils/MenuUtils.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-        )
+         )
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)

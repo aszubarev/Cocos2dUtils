@@ -1,6 +1,5 @@
 #ifndef COCOS2DUTILS_DATABASEUTILS_H
 #define COCOS2DUTILS_DATABASEUTILS_H
-
 #include "cocos2d.h"
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 USING_NS_CC;

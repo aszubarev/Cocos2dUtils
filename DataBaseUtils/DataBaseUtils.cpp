@@ -1,7 +1,5 @@
 #include "DataBaseUtils.h"
 
-
-
 DataBaseUtils *DataBaseUtils::getInstance()
 {
     DataBaseUtils* instance = new (std::nothrow) DataBaseUtils();
