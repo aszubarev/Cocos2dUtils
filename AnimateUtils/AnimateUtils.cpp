@@ -2,7 +2,7 @@
 #include "../ImageUtils/ImageUtils.h"
 
 const unsigned int AnimateUtils::max_anim_frames = 999;
-const unsigned int AnimateUtils::max_numb_digits = 4;
+const unsigned int AnimateUtils::max_numb_digits = 3;
 
 Animate *AnimateUtils::createAnimate(std::string &path, std::string &pattern,
                                      std::string &format, unsigned int numb_anim_frames, float delay)
@@ -23,11 +23,7 @@ std::string AnimateUtils::createFileName(std::string &path, std::string &pattern
         throw std::out_of_range("big input number");
     }
 
-    char number_str[AnimateUtils::max_numb_digits];
-    memset(number_str, '\0', AnimateUtils::max_numb_digits);
-    sprintf(number_str, "%i", number);
-
-    return path + pattern + number_str + format;
+    return path + pattern + std::to_string(number) + format;
 }
 
 Vector<SpriteFrame *>AnimateUtils::createVectorSpriteFrames(std::string &path, std::string &pattern,
@@ -43,9 +39,9 @@ Vector<SpriteFrame *>AnimateUtils::createVectorSpriteFrames(std::string &path, s
     std::string frame_filename = std::move(AnimateUtils::createFileName(path, pattern, format, 1));
     Size image_size = ImageUtils::getSize(frame_filename);
 
-    for (unsigned int i = 1; i < numb_anim_frames; ++i)
+    for (unsigned int i = 1; i <= numb_anim_frames; ++i)
     {
-        frame_filename = std::move(AnimateUtils::createFileName(path, pattern, format, 1));
+        frame_filename = std::move(AnimateUtils::createFileName(path, pattern, format, i));
         SpriteFrame *frame = SpriteFrame::create(frame_filename,
                                                  Rect(0, 0, image_size.width, image_size.height));
         if (frame == nullptr)
@@ -54,6 +50,7 @@ Vector<SpriteFrame *>AnimateUtils::createVectorSpriteFrames(std::string &path, s
             throw std::invalid_argument(err);
         }
 
+        frame->setAnchorPoint(Vec2(0.5, 0));
         sprite_frames.pushBack(frame);
     }
 
