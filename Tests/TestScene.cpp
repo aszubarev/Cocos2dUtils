@@ -11,8 +11,8 @@ HelloWorld::HelloWorld(): errorMessage()
 HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
+    CC_SAFE_RELEASE_NULL(_menuUtils);
 }
-
 
 Scene* HelloWorld::createScene()
 {
@@ -26,7 +26,6 @@ Scene* HelloWorld::createScene()
     
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
-
     // add layer as a child to scene
     scene->addChild(layer);
 
@@ -43,119 +42,114 @@ bool HelloWorld::init()
     {
         return false;
     }
+    _director = Director::getInstance();
+    _visible_size = _director->getVisibleSize();
+    _origin = _director->getVisibleOrigin();
 
-    auto contactListener = EventListenerPhysicsContact::create();
-    contactListener->onContactBegin = CC_CALLBACK_1(HelloWorld::onContactBegin, this);
-    contactListener->onContactSeparate = CC_CALLBACK_1(HelloWorld::onContactSeparate, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+    _music_percent = 73;
+    if(_music_percent)
+    {
+        _check_box_active = true;
+    }
+
+    _menuUtils = MenuUtils::create();
+    _menuUtils->retain();
+
+    _background_sprite = _menuUtils->setBackground();
+    this->addChild(_background_sprite, -1);
+
+    _header_label = _menuUtils->setHeaderLabel("STRIKE TOWER");
+    this->addChild(_header_label);
+
+    _menu_label = _menuUtils->setMenuLabel("menu", Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 4 / 8),
+                             CC_CALLBACK_1(HelloWorld::callback_start, this));
+    this->addChild(_menu_label);
+
+    _slider = _menuUtils->setSlider(Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 3 / 8),
+                    _music_percent, CC_CALLBACK_2(HelloWorld::callbackSliderEffect, this));
+    this->addChild(_slider);
+
+    _check_box = _menuUtils->setCheckBox(Vec2(_origin.x + _visible_size.width * 6 / 7, _origin.y + _visible_size.height * 3 / 8),
+                        _check_box_active, CC_CALLBACK_2(HelloWorld::callbackCheckBox, this));
+    this->addChild(_check_box);
+
+    _button = _menuUtils->setButton(Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 2 / 8),
+                                    CC_CALLBACK_2(HelloWorld::callbackButton, this));
+    this->addChild(_button);
+
 
     this->scheduleUpdate();
-    
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-    
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-//    auto sprite = Sprite::create("HelloWorld.png");
-    Sprite* sprite = nullptr;
-    try
-    {
-        sprite = SpriteUtils::createWithStaticBoxPB("HelloWorld.png", 1);
-    }
-    catch (std::invalid_argument &err)
-    {
-        std::cout << err.what() << std::endl;
-        return true;
-    }
-    catch (std::runtime_error &err)
-    {
-        std::cout << err.what() << std::endl;
-        return true;
-    }
-    catch (...)
-    {
-        std::cout << "UNKNOWN ERROR" << std::endl;
-        return true;
-    }
-
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
 
     _settingUtils = SettingsUtils::getInstance();
     _settingUtils->retain();
 
     _settingUtils->setVolumeEffect(23);
     std::cout << _settingUtils->getVolumeEffect();
-    
+
     return true;
 }
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void HelloWorld::callback_start(cocos2d::Ref *pSender)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
-
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-    
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() and exit(0) as given above,instead trigger a custom event created in RootViewController.mm as below*/
-    
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-    
+    _director->pushScene(TransitionFade::create(0.7, HelloWorld::createScene()));
+    this->removeFromParent();
 }
 
-void HelloWorld::update(float dt)
+void HelloWorld::callbackSliderEffect(Ref* psender, ui::Slider::EventType type)
 {
-
+    auto slider = dynamic_cast<ui::Slider*>(psender);
+    if(type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
+    {
+         _music_percent = slider->getPercent();
+        CCLOG("percentage = %d", _music_percent);
+        if(_music_percent != 0)
+        {
+            _check_box->setSelected(true);
+        }
+        else
+        {
+            _check_box->setSelected(false);
+        }
+//      _settingsUtils->setVolumeEffect(percent);
+    }
 }
 
-bool HelloWorld::onContactBegin(cocos2d::PhysicsContact &contact)
+void HelloWorld::callbackCheckBox(Ref* psender, ui::CheckBox::EventType type)
 {
-    return false;
+    if(_slider == nullptr)
+    {
+        return;
+    }
+    switch(type)
+    {
+        case ui::CheckBox::EventType::SELECTED:
+        {
+            _slider->setPercent(_music_percent);
+            _check_box_active = true;
+        }break;
+        case ui::CheckBox::EventType::UNSELECTED:
+        {
+            _slider->setPercent(0);
+            _check_box_active = false;
+        }break;
+        default:
+            break;
+    }
 }
 
-bool HelloWorld::onContactSeparate(cocos2d::PhysicsContact &contact)
+void HelloWorld::callbackButton(Ref *pSender, ui::Widget::TouchEventType type)
 {
-    return false;
+    switch (type)
+    {
+        case ui::Widget::TouchEventType::BEGAN:
+        {
+            _button->setTitleText("ru");
+        }break;
+        case ui::Widget::TouchEventType::ENDED:
+        {
+
+        }break;
+        default:
+            break;
+    }
 }
-
-
