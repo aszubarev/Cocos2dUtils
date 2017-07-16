@@ -53,7 +53,7 @@ class GUIUtils
 public:
 
     //Background
-    static Sprite *createBackground(const std::string &background);
+    static Sprite *createBackground(const std::string &background, Size &visibleSize);
 
     //Label
     static Label *createLable(const std::string &text, LabelStyle &labelStyle);

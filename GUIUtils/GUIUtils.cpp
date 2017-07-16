@@ -1,6 +1,6 @@
 #include "GUIUtils.h"
 
-Sprite *GUIUtils::createBackground(const std::string &background)
+Sprite *GUIUtils::createBackground(const std::string &background, Size &visibleSize)
 {
     Sprite *bg = Sprite::create(background);
     if (bg == nullptr)
@@ -9,15 +9,13 @@ Sprite *GUIUtils::createBackground(const std::string &background)
         throw std::invalid_argument(err);
     }
 
-    Size vSize = Director::getInstance()->getVisibleSize();
-
-    float scaleY = vSize.height / bg->getContentSize().height;
-    float scaleX = vSize.width  / bg->getContentSize().width;
+    float scaleY = visibleSize.height / bg->getContentSize().height;
+    float scaleX = visibleSize.width  / bg->getContentSize().width;
 
     if (scaleX > scaleY) { bg->setScale(scaleX); }
     else { bg->setScale(scaleY); }
 
-    bg->setPosition(vSize.width / 2, vSize.height / 2);
+    bg->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     return bg;
 }
 
