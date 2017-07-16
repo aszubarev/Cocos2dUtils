@@ -1,5 +1,7 @@
 #include "AppDelegate.h"
 #include "TestScene.h"
+//#include "../StringUtils/StringUtils.h"
+#include <iostream>
 
 USING_NS_CC;
 

@@ -11,7 +11,6 @@ HelloWorld::HelloWorld(): errorMessage()
 HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
-    CC_SAFE_RELEASE_NULL(_menuUtils);
 }
 
 Scene* HelloWorld::createScene()
@@ -36,55 +35,59 @@ Scene* HelloWorld::createScene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !Layer::init() )
-    {
-        return false;
-    }
-    _director = Director::getInstance();
-    _visible_size = _director->getVisibleSize();
-    _origin = _director->getVisibleOrigin();
-
-    _music_percent = 73;
-    if(_music_percent)
-    {
-        _check_box_active = true;
-    }
-
-    _menuUtils = MenuUtils::create();
-    _menuUtils->retain();
-
-    _background_sprite = _menuUtils->setBackground();
-    this->addChild(_background_sprite, -1);
-
-    _header_label = _menuUtils->setHeaderLabel("STRIKE TOWER");
-    this->addChild(_header_label);
-
-    _menu_label = _menuUtils->setMenuLabel("menu", Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 4 / 8),
-                             CC_CALLBACK_1(HelloWorld::callback_start, this));
-    this->addChild(_menu_label);
-
-    _slider = _menuUtils->setSlider(Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 3 / 8),
-                    _music_percent, CC_CALLBACK_2(HelloWorld::callbackSliderEffect, this));
-    this->addChild(_slider);
-
-    _check_box = _menuUtils->setCheckBox(Vec2(_origin.x + _visible_size.width * 6 / 7, _origin.y + _visible_size.height * 3 / 8),
-                        _check_box_active, CC_CALLBACK_2(HelloWorld::callbackCheckBox, this));
-    this->addChild(_check_box);
-
-    _button = _menuUtils->setButton(Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 2 / 8),
-                                    CC_CALLBACK_2(HelloWorld::callbackButton, this));
-    this->addChild(_button);
-
-
-    this->scheduleUpdate();
-
-    _settingUtils = SettingsUtils::getInstance();
-    _settingUtils->retain();
-
-    _settingUtils->setVolumeEffect(23);
-    std::cout << _settingUtils->getVolumeEffect();
+//    //////////////////////////////
+//    // 1. super init first
+//    if ( !Layer::init() )
+//    {
+//        return false;
+//    }
+//    _director = Director::getInstance();
+//    _visible_size = _director->getVisibleSize();
+//    _origin = _director->getVisibleOrigin();
+//
+//    _music_percent = 73;
+//    if(_music_percent)
+//    {
+//        _check_box_active = true;
+//    }
+//
+//    _menuUtils = GUIUtils::create();
+//    _menuUtils->retain();
+//
+//    _background_sprite = _menuUtils->createBackground();
+//    this->addChild(_background_sprite, -1);
+//
+//    _header_label = _menuUtils->setHeaderLabel("STRIKE TOWER");
+//    this->addChild(_header_label);
+//
+//    _menu_label = _menuUtils->createMenuLabel("menu", Vec2(_origin.x + _visible_size.width / 2,
+//                                                           _origin.y + _visible_size.height * 4 / 8),
+//                                              CC_CALLBACK_1(HelloWorld::callback_start, this));
+//    this->addChild(_menu_label);
+//
+//    _slider = _menuUtils->createSlider(
+//            Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 3 / 8),
+//            _music_percent, CC_CALLBACK_2(HelloWorld::callbackSliderEffect, this));
+//    this->addChild(_slider);
+//
+//    _check_box = _menuUtils->createCheckBox(
+//            Vec2(_origin.x + _visible_size.width * 6 / 7, _origin.y + _visible_size.height * 3 / 8),
+//            _check_box_active, CC_CALLBACK_2(HelloWorld::callbackCheckBox, this));
+//    this->addChild(_check_box);
+//
+//    _button = _menuUtils->createButtonWithTitle(
+//            Vec2(_origin.x + _visible_size.width / 2, _origin.y + _visible_size.height * 2 / 8),
+//            CC_CALLBACK_2(HelloWorld::callbackButton, this));
+//    this->addChild(_button);
+//
+//
+//    this->scheduleUpdate();
+//
+//    _settingUtils = SettingsUtils::getInstance();
+//    _settingUtils->retain();
+//
+//    _settingUtils->setVolumeEffect(23);
+//    std::cout << _settingUtils->getVolumeEffect();
 
     return true;
 }
