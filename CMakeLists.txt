@@ -157,6 +157,7 @@ endif( WIN32 )
 set(GAME_SRC
         Tests/AppDelegate.cpp
         Tests/TestScene.cpp
+        Tests/Styles/HeaderStyle.cpp
 
         ImageUtils/ImageUtils.cpp
         PhysicsBodyUtils/PhysicsBodyUtils.cpp
@@ -166,12 +167,14 @@ set(GAME_SRC
         DataBaseUtils/DataBaseUtils.cpp
         GUIUtils/GUIUtils.cpp
 
+
         ${PLATFORM_SPECIFIC_SRC}
         )
 
 set(GAME_HEADERS
         Tests/AppDelegate.h
         Tests/TestScene.h
+        Tests/Styles/HeaderStyle.h
 
         ImageUtils/ImageUtils.h
         PhysicsBodyUtils/PhysicsBodyUtils.h
