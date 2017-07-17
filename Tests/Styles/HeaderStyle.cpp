@@ -7,30 +7,10 @@ HeaderStyle::HeaderStyle(float scaleFactor):
     labelStyle(textStyle, shadowStyle, outlineStyle)
 {}
 
-HeaderStyle::~HeaderStyle()
-{}
-
 HeaderStyle* HeaderStyle::getInstance()
 {
     HeaderStyle* instance = new (std::nothrow) HeaderStyle(Director::getInstance()->getContentScaleFactor());
     instance->autorelease();
 
     return instance;
-}
-
-HeaderStyle::HeaderStyle(const HeaderStyle &obj):
-        textStyle(obj.textStyle),
-        shadowStyle(obj.shadowStyle),
-        outlineStyle(obj.outlineStyle),
-        labelStyle(obj.labelStyle)
-{}
-
-HeaderStyle &HeaderStyle::operator=(const HeaderStyle &obj)
-{
-    textStyle = obj.textStyle;
-    shadowStyle = obj.shadowStyle;
-    outlineStyle = obj.outlineStyle;
-    labelStyle = obj.labelStyle;
-
-    return *this;
 }

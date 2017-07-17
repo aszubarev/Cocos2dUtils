@@ -1,4 +1,5 @@
 #include "GUIUtils.h"
+#include <iostream>
 
 Sprite *GUIUtils::createBackground(const std::string &background, Size &visibleSize)
 {
@@ -29,13 +30,13 @@ Label *GUIUtils::createLable(const std::string &text, LabelStyle &labelStyle)
                                                labelStyle.textStyle.fontSize);
         throw std::invalid_argument(err);
     }
+    setStyleLabel(label, labelStyle);
     return label;
 }
 
 Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle, const ccMenuCallback &callback)
 {
     Label *label = createLable(text, labelStyle);
-    setStyleLabel(label, labelStyle);
     Menu *menu = createMenu(label, position, callback);
     return menu;
 }
