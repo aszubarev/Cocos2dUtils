@@ -9,16 +9,16 @@ struct TextStyle
     TextStyle(float pFontSize, const std::string &pFontFile, const Color4B &pTextColor);
 
     float fontSize;
-    const std::string fontFile;
-    const Color4B color;
+    std::string fontFile;
+    Color4B color;
 };
 
 struct LabelShadowStyle
 {
     LabelShadowStyle(const Color4B &pShadowColor, Size pShadowOffset, int pBlurRadius);
 
-    const Color4B color;
-    const Size offset;
+    Color4B color;
+    Size offset;
     int blurRadius;
 };
 
@@ -26,7 +26,7 @@ struct LabelOutlineStyle
 {
     LabelOutlineStyle(const Color4B &pOutlineColor, int pOutlineSize);
 
-    const Color4B color;
+    Color4B color;
     int size;
 };
 

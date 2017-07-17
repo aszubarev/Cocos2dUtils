@@ -2,6 +2,8 @@
 #include "SimpleAudioEngine.h"
 #include "../SpriteUtils/SpriteUtils.h"
 #include <iostream>
+#include "Styles/HeaderStyle.h"
+#include "../GUIUtils/GUIUtils.h"
 
 USING_NS_CC;
 
@@ -35,15 +37,33 @@ Scene* HelloWorld::createScene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-//    //////////////////////////////
-//    // 1. super init first
-//    if ( !Layer::init() )
-//    {
-//        return false;
-//    }
-//    _director = Director::getInstance();
-//    _visible_size = _director->getVisibleSize();
-//    _origin = _director->getVisibleOrigin();
+    //////////////////////////////
+    // 1. super init first
+    if ( !Layer::init() )
+    {
+        return false;
+    }
+    _director = Director::getInstance();
+    _visible_size = _director->getVisibleSize();
+    _origin = _director->getVisibleOrigin();
+
+    try {
+        HeaderStyle *hs = HeaderStyle::getInstance();
+        Label *headerLabel = GUIUtils::createLable("StrikeTower", hs->labelStyle);
+        headerLabel->setPosition(_visible_size.width / 2, _visible_size.height/  2);
+        addChild(headerLabel);
+    }
+    catch (std::invalid_argument &err)
+    {
+        std::cout << err.what() << std::endl;
+    }
+    catch (...)
+    {
+        std::cout << "UNKNOWN ERROR" << std::endl;
+    }
+
+
+
 //
 //    _music_percent = 73;
 //    if(_music_percent)

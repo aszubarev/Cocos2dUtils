@@ -7,17 +7,20 @@ USING_NS_CC;
 class HeaderStyle: public Ref
 {
 public:
-    HeaderStyle();
-    static HeaderStyle getInstance();
+    HeaderStyle(float scaleFactor);
+    static HeaderStyle* getInstance();
 
-private:
+CC_CONSTRUCTOR_ACCESS:
+    HeaderStyle() = delete;;
+    HeaderStyle(const HeaderStyle &obj);
+    HeaderStyle &operator =(const HeaderStyle &obj);
+    ~HeaderStyle();
 
+public:
     TextStyle textStyle;
     LabelShadowStyle shadowStyle;
     LabelOutlineStyle outlineStyle;
-
     LabelStyle labelStyle;
-
 };
 
 #endif // HEADERSTYLES_H
