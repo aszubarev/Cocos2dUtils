@@ -27,6 +27,7 @@ Copy next headers paths into set(GAME_HEADERS path1 path2 ...):
     ${COCOS2d_UTILS_ROOT}/AnimateUtils/AnimateUtils.h
     ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.h
     ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.h
+    ${COCOS2d_UTILS_ROOT}/GUIUtils/GUIUtils.h
     
 Copy next sources paths into set(GAME_SRC path1 path2 ...):
 
@@ -36,6 +37,7 @@ Copy next sources paths into set(GAME_SRC path1 path2 ...):
     ${COCOS2d_UTILS_ROOT}/AnimateUtils/AnimateUtils.cpp
     ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.cpp
     ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/GUIUtils/GUIUtils.cpp
     
 Add to your CmakeList.txt:
   
