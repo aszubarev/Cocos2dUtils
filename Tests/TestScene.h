@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 #include "../SettingsUtils/SettingsUtils.h"
-#include "../MenuUtils/MenuUtils.h"
+#include "../GUIUtils/GUIUtils.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -29,7 +29,7 @@ private:
     Vec2 _origin;
 
     SettingsUtils *_settingUtils;
-    MenuUtils *_menuUtils;
+    GUIUtils *_menuUtils;
 
     char* errorMessage;
     cocos2d::Layer *_layer;

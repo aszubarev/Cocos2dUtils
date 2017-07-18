@@ -157,6 +157,7 @@ endif( WIN32 )
 set(GAME_SRC
         Tests/AppDelegate.cpp
         Tests/TestScene.cpp
+        Tests/Styles/HeaderStyle.cpp
 
         ImageUtils/ImageUtils.cpp
         PhysicsBodyUtils/PhysicsBodyUtils.cpp
@@ -164,7 +165,8 @@ set(GAME_SRC
         AnimateUtils/AnimateUtils.cpp
         SettingsUtils/SettingsUtils.cpp
         DataBaseUtils/DataBaseUtils.cpp
-        MenuUtils/MenuUtils.cpp
+        GUIUtils/GUIUtils.cpp
+
 
         ${PLATFORM_SPECIFIC_SRC}
         )
@@ -172,6 +174,7 @@ set(GAME_SRC
 set(GAME_HEADERS
         Tests/AppDelegate.h
         Tests/TestScene.h
+        Tests/Styles/HeaderStyle.h
 
         ImageUtils/ImageUtils.h
         PhysicsBodyUtils/PhysicsBodyUtils.h
@@ -179,10 +182,10 @@ set(GAME_HEADERS
         AnimateUtils/AnimateUtils.h
         SettingsUtils/SettingsUtils.h
         DataBaseUtils/DataBaseUtils.h
-        MenuUtils/MenuUtils.h
+        GUIUtils/GUIUtils.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-         )
+       )
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
