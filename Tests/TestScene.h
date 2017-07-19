@@ -6,6 +6,7 @@
 #include "../SettingsUtils/SettingsUtils.h"
 #include "../GUIUtils/GUIUtils.h"
 #include "../SkillsUtils/SkillsUtils.h"
+#include "../ProgressStackBar/ProgressStackBar.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -33,6 +34,8 @@ private:
     GUIUtils *_menuUtils;
 
     SkillsUtils *_skillsUtils;
+
+    ProgressStackBar *_progressStackBar;
 
     char* errorMessage;
     cocos2d::Layer *_layer;

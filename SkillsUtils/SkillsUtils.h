@@ -6,12 +6,6 @@
 
 USING_NS_CC;
 
-#define DEFAULT_FLYINGSKILL 0
-#define DEFAULT_MAGNETICSKILL 0
-#define DEFAULT_ARMORSKILL 0
-#define DEFAULT_DAMAGESKILL 0
-#define DEFAULT_LUCKMONEYSKILL 0
-
 class SkillsUtils : public Ref
 {
 public:
@@ -37,6 +31,7 @@ public:
     SkillsUtils(const SkillsUtils &obj) = delete;
     SkillsUtils &operator =(const SkillsUtils &obj) = delete;
     ~SkillsUtils();
+    void insert(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill);
 
 private:
     DataBaseUtils *_dbUtils;
@@ -46,14 +41,13 @@ private:
     std::string _atrMagneticSkill;
     std::string _atrArmorSkill;
     std::string _atrDamageSkill;
+
     std::string _atrLuckMoneySkill;
 
     int _numberOfPlayers;
-
     bool setOneAtribute(int playerId, std::string &atribute, int newAmount);
     std::string getOneAtribute(int playerId, std::string &atribute);
     void createTable();
-    void insert(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill);
 
 };
 

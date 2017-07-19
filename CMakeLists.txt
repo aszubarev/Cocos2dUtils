@@ -167,6 +167,7 @@ set(GAME_SRC
         DataBaseUtils/DataBaseUtils.cpp
         GUIUtils/GUIUtils.cpp
         SkillsUtils/SkillsUtils.cpp
+        ProgressStackBar/ProgressStackBar.cpp
 
 
         ${PLATFORM_SPECIFIC_SRC}
@@ -185,6 +186,7 @@ set(GAME_HEADERS
         DataBaseUtils/DataBaseUtils.h
         GUIUtils/GUIUtils.h
         SkillsUtils/SkillsUtils.h
+        ProgressStackBar/ProgressStackBar.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
          )

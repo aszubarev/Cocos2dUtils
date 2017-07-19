@@ -14,6 +14,7 @@ HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
     CC_SAFE_RELEASE_NULL(_skillsUtils);
+    CC_SAFE_RELEASE_NULL(_progressStackBar);
 }
 
 Scene* HelloWorld::createScene()
@@ -63,8 +64,22 @@ bool HelloWorld::init()
         std::cout << "UNKNOWN ERROR" << std::endl;
     }
 
+//    Vec2 pos = Vec2(_visible_size.width/2, _visible_size.height/6);
+//    ui::Slider* sl = GUIUtils::createSlider("slider/slider.png", "slider/transparentPoint.png",
+//                        "slider/balls.png",
+//                        10, pos,
+//                        CC_CALLBACK_2(HelloWorld::callbackSliderEffect, this));
+//    this->addChild(sl);
 
-
+    std::string emptyBall = "progressStackBar/emptyBall.png";
+    std::string yellowBall = "progressStackBar/yellowBall.png";
+    std::string backGround = "progressStackBar/yellowBall.png";
+    _progressStackBar = ProgressStackBar::create(emptyBall, yellowBall, backGround, 3, 8);
+    _progressStackBar->retain();
+    Sprite *empty = _progressStackBar->set_empty_ball();
+    this->addChild(empty);
+    Sprite *yellow = _progressStackBar->set_yellow_ball();
+    this->addChild(yellow);
 //
 //    _music_percent = 73;
 //    if(_music_percent)
