@@ -23,7 +23,7 @@ std::string AnimateUtils::createFileName(std::string &path, std::string &pattern
         throw std::out_of_range("big input number");
     }
 
-    return path + pattern + std::to_string(number) + format;
+    return path + pattern + cocos2d::StringUtils::to_string(number) + format;
 }
 
 Vector<SpriteFrame *>AnimateUtils::createVectorSpriteFrames(std::string &path, std::string &pattern,
