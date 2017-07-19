@@ -15,8 +15,6 @@ SkillsUtils::SkillsUtils():
         _atrLuckMoneySkill("luckMoneySkill")
 {
 
-    _numberOfPlayers = 7;
-
     _dbUtils = DataBaseUtils::getInstance();
     _dbUtils->retain();
     createTable();

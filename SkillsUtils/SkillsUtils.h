@@ -44,12 +44,10 @@ private:
 
     std::string _atrLuckMoneySkill;
 
-    int _numberOfPlayers;
     bool setOneAtribute(int playerId, std::string &atribute, int newAmount);
     std::string getOneAtribute(int playerId, std::string &atribute);
     void createTable();
 
 };
-
 
 #endif //COCOS2DUTILS_SKILLSUTILS_H
