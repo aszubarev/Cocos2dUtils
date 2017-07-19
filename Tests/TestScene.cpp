@@ -13,6 +13,7 @@ HelloWorld::HelloWorld(): errorMessage()
 HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
+    CC_SAFE_RELEASE_NULL(_skillsUtils);
 }
 
 Scene* HelloWorld::createScene()
@@ -109,6 +110,10 @@ bool HelloWorld::init()
 //    _settingUtils->setVolumeEffect(23);
 //    std::cout << _settingUtils->getVolumeEffect();
 
+    _skillsUtils = SkillsUtils::getInstance();
+    _skillsUtils->retain();
+    _skillsUtils->setArmorSkill(2, 7);
+    std::cout << _skillsUtils->getDamageSkill(3);
     return true;
 }
 

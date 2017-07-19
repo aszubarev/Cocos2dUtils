@@ -5,6 +5,7 @@
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 #include "../SettingsUtils/SettingsUtils.h"
 #include "../GUIUtils/GUIUtils.h"
+#include "../SkillsUtils/SkillsUtils.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -30,6 +31,8 @@ private:
 
     SettingsUtils *_settingUtils;
     GUIUtils *_menuUtils;
+
+    SkillsUtils *_skillsUtils;
 
     char* errorMessage;
     cocos2d::Layer *_layer;

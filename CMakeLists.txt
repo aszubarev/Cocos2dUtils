@@ -166,6 +166,7 @@ set(GAME_SRC
         SettingsUtils/SettingsUtils.cpp
         DataBaseUtils/DataBaseUtils.cpp
         GUIUtils/GUIUtils.cpp
+        SkillsUtils/SkillsUtils.cpp
 
 
         ${PLATFORM_SPECIFIC_SRC}
@@ -183,9 +184,10 @@ set(GAME_HEADERS
         SettingsUtils/SettingsUtils.h
         DataBaseUtils/DataBaseUtils.h
         GUIUtils/GUIUtils.h
+        SkillsUtils/SkillsUtils.h
 
         ${PLATFORM_SPECIFIC_HEADERS}
-       )
+         )
 if( ANDROID )
     add_library(${APP_NAME} SHARED ${GAME_SRC} ${GAME_HEADERS})
     IF(CMAKE_BUILD_TYPE MATCHES RELEASE)
