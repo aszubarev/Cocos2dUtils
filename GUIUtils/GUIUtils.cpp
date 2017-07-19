@@ -34,7 +34,8 @@ Label *GUIUtils::createLable(const std::string &text, LabelStyle &labelStyle)
     return label;
 }
 
-Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle, const ccMenuCallback &callback)
+Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle,
+                                const ccMenuCallback &callback)
 {
     Label *label = createLable(text, labelStyle);
     Menu *menu = createMenu(label, position, callback);

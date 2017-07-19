@@ -31,7 +31,6 @@ private:
     Vec2 _origin;
 
     SettingsUtils *_settingUtils;
-    GUIUtils *_menuUtils;
 
     SkillsUtils *_skillsUtils;
 

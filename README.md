@@ -25,6 +25,9 @@ Copy next headers paths into set(GAME_HEADERS path1 path2 ...):
     ${COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.h
     ${COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.h
     ${COCOS2d_UTILS_ROOT}/AnimateUtils/AnimateUtils.h
+    ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.h
+    ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.h
+    ${COCOS2d_UTILS_ROOT}/GUIUtils/GUIUtils.h
     
 Copy next sources paths into set(GAME_SRC path1 path2 ...):
 
@@ -32,25 +35,12 @@ Copy next sources paths into set(GAME_SRC path1 path2 ...):
     ${COCOS2d_UTILS_ROOT}/PhysicsBodyUtils/PhysicsBodyUtils.cpp
     ${COCOS2d_UTILS_ROOT}/SpriteUtils/SpriteUtils.cpp
     ${COCOS2d_UTILS_ROOT}/AnimateUtils/AnimateUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.cpp
+    ${COCOS2d_UTILS_ROOT}/GUIUtils/GUIUtils.cpp
     
 Add to your CmakeList.txt:
   
     include_directories(${COCOS2d_UTILS_ROOT})
-
-Copy next sources paths into set(GAME_SRC path1 path2 ...):
-  ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.cpp
-  ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.cpp
-  
-Copy next headers paths into set(GAME_HEADERS path1 path2 ...):
-  ${COCOS2d_UTILS_ROOT}/SettingsUtils/SettingsUtils.h
-  ${COCOS2d_UTILS_ROOT}/DataBaseUtils/DataBaseUtils.h
-
-Copy target_link_libraries:
-  target_link_libraries(${APP_NAME} cocos2d sqlite3)
-
-
-    
-    
-  
-
-
+    target_link_libraries(${APP_NAME} cocos2d sqlite3)
+ 

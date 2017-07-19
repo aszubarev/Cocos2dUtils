@@ -11,7 +11,7 @@ SettingsUtils* SettingsUtils::getInstance()
 }
 
 SettingsUtils::SettingsUtils():
-        _atrTableName("AppSettings"), _atrPk("pk"), _atrVolumeEffect("volumeEffect"),
+        _tableName("AppSettings"), _atrPk("pk"), _atrVolumeEffect("volumeEffect"),
         _atrVolumeSound("volumeSound"), _atrLanguages("languages"), _atrVibroEnable("vibroEnable")
 {
     _dbUtils = DataBaseUtils::getInstance();
@@ -29,12 +29,12 @@ void SettingsUtils::createTable()
     if (_dbUtils->open())
     {
         sqlite3_stmt* stmt;
-        std::string sql = "CREATE TABLE IF NOT EXISTS " + _atrTableName + "(" +
+        std::string query = "CREATE TABLE IF NOT EXISTS " + _tableName + "(" +
                 _atrPk + " INTEGER PRIMARY KEY, " + _atrVolumeEffect + " INTEGER, " +
                 _atrVolumeSound + " INTEGER, " + _atrLanguages + " INTEGER, " +
                 _atrVibroEnable + " INTEGER);";
 
-        if (sqlite3_prepare_v2(_dbUtils->db(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
+        if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
         {
             if (sqlite3_step(stmt) != SQLITE_DONE)
             {
@@ -55,7 +55,7 @@ void SettingsUtils::insert(int volumeEffect, int volumeSound, int languages, int
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "INSERT INTO " + _atrTableName + " VALUES(1, ?, ?, ?, ?);";
+    std::string query = "INSERT INTO " + _tableName + " VALUES(1, ?, ?, ?, ?);";
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
         sqlite3_bind_int(stmt, 1, volumeEffect);
@@ -78,11 +78,11 @@ void SettingsUtils::insert(int volumeEffect, int volumeSound, int languages, int
     _dbUtils->close();
 }
 
-void SettingsUtils::deleteLine()
+void SettingsUtils::deleteLine(int pk)
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "delete from " + _atrTableName +  " where " + _atrPk + "=1";
+    std::string query = "delete from " + _tableName +  " where " + _atrPk + "=" + cocos2d::StringUtils::toString(pk);
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -101,7 +101,7 @@ bool SettingsUtils::setOneAtribute(std::string &atribute, int newAmount)
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
-    std::string query = "UPDATE " + _atrTableName + " set " + atribute + "=? where " + _atrPk + "=1;";
+    std::string query = "UPDATE " + _tableName + " set " + atribute + "=? where " + _atrPk + "=1;";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -221,7 +221,7 @@ std::string SettingsUtils::getOneAtribute(std::string &atribute)
     _dbUtils->open();
     sqlite3_stmt* stmt;
     std::string result;
-    std::string query = "SELECT " + atribute + " from " + _atrTableName + " where " + _atrPk + "=1;";
+    std::string query = "SELECT " + atribute + " from " + _tableName + " where " + _atrPk + "=1;";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
