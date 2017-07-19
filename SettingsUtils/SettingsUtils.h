@@ -30,8 +30,6 @@ public:
     int getLanguages();
     int getVibroEnable();
 
-    void deleteLine();
-
 CC_CONSTRUCTOR_ACCESS:
     SettingsUtils();
     SettingsUtils(const SettingsUtils &obj) = delete;
@@ -40,7 +38,7 @@ CC_CONSTRUCTOR_ACCESS:
 
 private:
     DataBaseUtils *_dbUtils;
-    std::string _atrTableName;
+    std::string _tableName;
     std::string _atrPk;
     std::string _atrVolumeEffect;
     std::string _atrVolumeSound;
@@ -51,7 +49,7 @@ private:
     std::string getOneAtribute(std::string &atribute);
     void createTable();
     void insert(int volumeEffect, int volumeSound, int languages, int vibroEnable);
-
+    void deleteLine(int pk);
 };
 
 
