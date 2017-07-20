@@ -34,14 +34,14 @@ Label *GUIUtils::createLabel(const std::string &text, LabelStyle &labelStyle)
     return label;
 }
 
-Label *::GUIUtils::createLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle)
+Label *::GUIUtils::createLabel(const std::string &text, const Vec2 &position, LabelStyle &labelStyle)
 {
     Label *label = createLabel(text, labelStyle);
     label->setPosition(position);
     return label;
 }
 
-Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle,
+Menu *GUIUtils::createMenuLabel(const std::string &text, const Vec2 &position, LabelStyle &labelStyle,
                                 const ccMenuCallback &callback)
 {
     Label *label = createLabel(text, labelStyle);
@@ -57,7 +57,7 @@ void GUIUtils::setStyleLabel(Label *label, LabelStyle &labelStyle)
     label->enableOutline(labelStyle.outlineStyle.color, labelStyle.outlineStyle.size);
 }
 
-Menu *GUIUtils::createMenu(Label *label, Vec2 &position, const ccMenuCallback &callback)
+Menu *GUIUtils::createMenu(Label *label, const Vec2 &position, const ccMenuCallback &callback)
 {
     MenuItemLabel *menu_item = MenuItemLabel::create(label, callback);
     menu_item->setPosition(position);
@@ -69,7 +69,7 @@ Menu *GUIUtils::createMenu(Label *label, Vec2 &position, const ccMenuCallback &c
 ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Background of slider
                                    const std::string &fileNameBall,     // Ball of slider
                                    const std::string &fileNameLine,     // Line of slider
-                                   int percent, Vec2 &position,
+                                   int percent, const Vec2 &position,
                                    const ui::Slider::ccSliderCallback &callback)
 {
     ui::Slider *slider = ui::Slider::create(fileNameBar, fileNameBall);
@@ -87,7 +87,7 @@ ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Backg
     return slider;
 }
 
-ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross, Vec2 position,
+ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross, const Vec2 &position,
                                         bool is_active, const ui::CheckBox::ccCheckBoxCallback &callback)
 {
     ui::CheckBox *check_box = ui::CheckBox::create(backGround, cross);
@@ -104,7 +104,7 @@ ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std
     return check_box;
 }
 
-ui::Button *GUIUtils::createButton(const std::string &button, Vec2 position,
+ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &position,
                                    const ui::Widget::ccWidgetTouchCallback &callback)
 {
     ui::Button* btn = ui::Button::create(button);
@@ -120,7 +120,7 @@ ui::Button *GUIUtils::createButton(const std::string &button, Vec2 position,
     return btn;
 }
 
-ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std::string &tilte, Vec2 position,
+ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std::string &tilte, const Vec2 &position,
                                             TitletStyle &titleStyle, const ui::Widget::ccWidgetTouchCallback &callback)
 {
     ui::Button* btn = createButton(button, position, callback);
