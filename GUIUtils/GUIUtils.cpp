@@ -20,7 +20,7 @@ Sprite *GUIUtils::createBackground(const std::string &background, Size &visibleS
     return bg;
 }
 
-Label *GUIUtils::createLable(const std::string &text, LabelStyle &labelStyle)
+Label *GUIUtils::createLabel(const std::string &text, LabelStyle &labelStyle)
 {
     Label *label = Label::createWithTTF(text, labelStyle.textStyle.fontFile, labelStyle.textStyle.fontSize);
     if (label == nullptr)
@@ -34,10 +34,17 @@ Label *GUIUtils::createLable(const std::string &text, LabelStyle &labelStyle)
     return label;
 }
 
+Label *::GUIUtils::createLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle)
+{
+    Label *label = createLabel(text, labelStyle);
+    label->setPosition(position);
+    return label;
+}
+
 Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle,
                                 const ccMenuCallback &callback)
 {
-    Label *label = createLable(text, labelStyle);
+    Label *label = createLabel(text, labelStyle);
     Menu *menu = createMenu(label, position, callback);
     return menu;
 }
@@ -130,7 +137,6 @@ ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std
 
     return btn;
 }
-
 
 TextStyle::TextStyle(float pFontSize, const std::string &pFontFile, const Color4B &pTextColor):
         fontSize(pFontSize),
