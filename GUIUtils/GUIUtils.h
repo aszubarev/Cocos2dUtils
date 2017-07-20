@@ -54,7 +54,8 @@ namespace GUIUtils
     Sprite *createBackground(const std::string &background, Size &visibleSize);
 
     //Label
-    Label *createLable(const std::string &text, LabelStyle &labelStyle);
+    Label *createLabel(const std::string &text, LabelStyle &labelStyle);
+    Label *createLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle);
     void setStyleLabel(Label *label, LabelStyle &labelStyle);
 
     //Menu label
