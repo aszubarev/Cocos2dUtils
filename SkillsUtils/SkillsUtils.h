@@ -24,14 +24,12 @@ public:
     int getDamageSkill(int playerId);
     int getLuckMoneySkill(int playerId);
 
-    void deleteLine(int playerId);
-
     CC_CONSTRUCTOR_ACCESS:
     SkillsUtils();
     SkillsUtils(const SkillsUtils &obj) = delete;
     SkillsUtils &operator =(const SkillsUtils &obj) = delete;
     ~SkillsUtils();
-    void insert(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill);
+    void insert_row(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill);
 
 private:
     DataBaseUtils *_dbUtils;
@@ -48,6 +46,8 @@ private:
     std::string getOneAtribute(int playerId, std::string &atribute);
     void createTable();
 
+    //dont need
+    void deleteLine(int playerId);
 };
 
 #endif //COCOS2DUTILS_SKILLSUTILS_H

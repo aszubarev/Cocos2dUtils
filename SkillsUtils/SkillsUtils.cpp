@@ -41,11 +41,6 @@ void SkillsUtils::createTable()
             {
                 CCLOG("Error in CREATE TABLE skillsUtils");
             }
-//            for(int i = 0; i < _numberOfPlayers; ++i)
-//            {
-////                insert(i, DEFAULT_FLYINGSKILL, DEFAULT_MAGNETICSKILL, DEFAULT_ARMORSKILL,
-////                       DEFAULT_DAMAGESKILL, DEFAULT_LUCKMONEYSKILL);
-//            }
         }
 
         sqlite3_reset(stmt);
@@ -54,7 +49,7 @@ void SkillsUtils::createTable()
     }
 }
 
-void SkillsUtils::insert(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill)
+void SkillsUtils::insert_row(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill)
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
