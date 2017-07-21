@@ -20,7 +20,7 @@ Sprite *GUIUtils::createBackground(const std::string &background, Size &visibleS
     return bg;
 }
 
-Label *GUIUtils::createLabel(const std::string &text, LabelStyle &labelStyle)
+Label *GUIUtils::createLable(const std::string &text, LabelStyle &labelStyle)
 {
     Label *label = Label::createWithTTF(text, labelStyle.textStyle.fontFile, labelStyle.textStyle.fontSize);
     if (label == nullptr)
@@ -34,17 +34,10 @@ Label *GUIUtils::createLabel(const std::string &text, LabelStyle &labelStyle)
     return label;
 }
 
-Label *::GUIUtils::createLabel(const std::string &text, const Vec2 &position, LabelStyle &labelStyle)
-{
-    Label *label = createLabel(text, labelStyle);
-    label->setPosition(position);
-    return label;
-}
-
-Menu *GUIUtils::createMenuLabel(const std::string &text, const Vec2 &position, LabelStyle &labelStyle,
+Menu *GUIUtils::createMenuLabel(const std::string &text, Vec2 &position, LabelStyle &labelStyle,
                                 const ccMenuCallback &callback)
 {
-    Label *label = createLabel(text, labelStyle);
+    Label *label = createLable(text, labelStyle);
     Menu *menu = createMenu(label, position, callback);
     return menu;
 }
@@ -57,7 +50,7 @@ void GUIUtils::setStyleLabel(Label *label, LabelStyle &labelStyle)
     label->enableOutline(labelStyle.outlineStyle.color, labelStyle.outlineStyle.size);
 }
 
-Menu *GUIUtils::createMenu(Label *label, const Vec2 &position, const ccMenuCallback &callback)
+Menu *GUIUtils::createMenu(Label *label, Vec2 &position, const ccMenuCallback &callback)
 {
     MenuItemLabel *menu_item = MenuItemLabel::create(label, callback);
     menu_item->setPosition(position);
@@ -69,7 +62,7 @@ Menu *GUIUtils::createMenu(Label *label, const Vec2 &position, const ccMenuCallb
 ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Background of slider
                                    const std::string &fileNameBall,     // Ball of slider
                                    const std::string &fileNameLine,     // Line of slider
-                                   int percent, const Vec2 &position,
+                                   int percent, Vec2 &position,
                                    const ui::Slider::ccSliderCallback &callback)
 {
     ui::Slider *slider = ui::Slider::create(fileNameBar, fileNameBall);
@@ -87,7 +80,7 @@ ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Backg
     return slider;
 }
 
-ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross, const Vec2 &position,
+ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross, Vec2 position,
                                         bool is_active, const ui::CheckBox::ccCheckBoxCallback &callback)
 {
     ui::CheckBox *check_box = ui::CheckBox::create(backGround, cross);
@@ -104,7 +97,7 @@ ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std
     return check_box;
 }
 
-ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &position,
+ui::Button *GUIUtils::createButton(const std::string &button, Vec2 position,
                                    const ui::Widget::ccWidgetTouchCallback &callback)
 {
     ui::Button* btn = ui::Button::create(button);
@@ -120,7 +113,7 @@ ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &positi
     return btn;
 }
 
-ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std::string &tilte, const Vec2 &position,
+ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std::string &tilte, Vec2 position,
                                             TitletStyle &titleStyle, const ui::Widget::ccWidgetTouchCallback &callback)
 {
     ui::Button* btn = createButton(button, position, callback);
@@ -137,6 +130,7 @@ ui::Button *GUIUtils::createButtonWithTitle(const std::string &button, const std
 
     return btn;
 }
+
 
 TextStyle::TextStyle(float pFontSize, const std::string &pFontFile, const Color4B &pTextColor):
         fontSize(pFontSize),

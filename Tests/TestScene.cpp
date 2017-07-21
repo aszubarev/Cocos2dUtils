@@ -51,7 +51,7 @@ bool HelloWorld::init()
 
     try {
         HeaderStyle *hs = HeaderStyle::getInstance();
-        Label *headerLabel = GUIUtils::createLabel("StrikeTower", hs->labelStyle);
+        Label *headerLabel = GUIUtils::createLable("StrikeTower", hs->labelStyle);
         headerLabel->setPosition(_visible_size.width / 2, _visible_size.height/  2);
         addChild(headerLabel);
     }
