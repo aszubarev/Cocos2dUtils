@@ -12,7 +12,7 @@ public:
     ~ProgressStackBar();
 
     static ProgressStackBar *create(std::string &emptyBall, std::string &yellowBall,
-                    int currentLevel, int maxLevel);
+                                    int currentLevel, int maxLevel);
 
     bool increment();
     bool decrement();

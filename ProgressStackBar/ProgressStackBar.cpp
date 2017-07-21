@@ -24,7 +24,7 @@ ProgressStackBar::~ProgressStackBar()
 {}
 
 ProgressStackBar *ProgressStackBar::create(std::string &emptyCellFileName, std::string &filledCellFileName,
-            int currentLevel, int maxLevel)
+                                           int currentLevel, int maxLevel)
 {
     ProgressStackBar *progressStackBar = new (std::nothrow) ProgressStackBar(emptyCellFileName, filledCellFileName, currentLevel, maxLevel);
     progressStackBar->autorelease();
