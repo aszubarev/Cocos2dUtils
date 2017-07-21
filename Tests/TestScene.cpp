@@ -13,6 +13,7 @@ HelloWorld::HelloWorld(): errorMessage()
 HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
+    CC_SAFE_RELEASE_NULL(_scoreUtils);
 }
 
 Scene* HelloWorld::createScene()
@@ -62,6 +63,14 @@ bool HelloWorld::init()
         std::cout << "UNKNOWN ERROR" << std::endl;
     }
 
+    _scoreUtils = ScoreUtils::getInstance();
+    _scoreUtils->retain();
+    std::cout << "coins : " << _scoreUtils->getCoins() << std::endl;
+    std::cout << "diamonds : " << _scoreUtils->getDiamonds() << std::endl;
+    _scoreUtils->setCoins(500);
+    std::cout << "coins : " << _scoreUtils->getCoins() << std::endl;
+    _scoreUtils->setDiamonds(100);
+    std::cout << "diamonds : " << _scoreUtils->getDiamonds() << std::endl;
 
 
 //
