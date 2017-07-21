@@ -10,7 +10,7 @@ ProgressStackBar::ProgressStackBar(const std::string &emptyCellFile, const std::
 
     _cellSize = ImageUtils::getSize(_emptyCellFile);
 
-    _gap = _cellSize.width / 4;
+    _gap = _cellSize.width / 6;
     _step = _gap + _cellSize.width;
     init(_currentLevel, _maxLevel);
 }

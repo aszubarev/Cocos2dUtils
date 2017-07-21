@@ -72,7 +72,7 @@ bool HelloWorld::init()
 //    this->addChild(sl);
 
     std::string emptyBall = "progressStackBar/emptyBall.png";
-    std::string yellowBall = "progressStackBar/yellowBall.png";
+    std::string yellowBall = "progressStackBar/filledBall.png";
     _progressStackBar = ProgressStackBar::create(emptyBall, yellowBall, 3, 8);
     _progressStackBar->retain();
     _progressStackBar->setPosition(Vec2(_visible_size.width / 4, _visible_size.height / 6));
