@@ -22,9 +22,8 @@ private:
     int _currentLevel;
     int _maxLevel;
 
-    std::vector<Sprite*> _balls;
     Sprite *_emptyBallSprite;
-//    Sprite *_yellowBallSprite;
+    Sprite *_yellowBallSprite;
     Size _ballSize;
     float _gap;
 
