@@ -31,6 +31,7 @@ private:
     bool update_current_level(int currentLevel);
 
     std::string prefix_err_create_sprite;
+    std::string prefix_err_bad_argument;
 };
 
 

@@ -81,7 +81,7 @@ bool HelloWorld::init()
     _progressStackBar->increment();
     _progressStackBar->increment();
     _progressStackBar->decrement();
-    
+
 //
 //    _music_percent = 73;
 //    if(_music_percent)
