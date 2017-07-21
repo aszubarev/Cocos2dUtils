@@ -73,13 +73,12 @@ bool HelloWorld::init()
 
     std::string emptyBall = "progressStackBar/emptyBall.png";
     std::string yellowBall = "progressStackBar/yellowBall.png";
-    std::string backGround = "progressStackBar/yellowBall.png";
-    _progressStackBar = ProgressStackBar::create(emptyBall, yellowBall, backGround, 3, 8);
+    _progressStackBar = ProgressStackBar::create(emptyBall, yellowBall, 3, 8);
     _progressStackBar->retain();
-    Sprite *empty = _progressStackBar->set_empty_ball();
-    this->addChild(empty);
-    Sprite *yellow = _progressStackBar->set_yellow_ball();
-    this->addChild(yellow);
+    _progressStackBar->setPosition(Vec2(_visible_size.width / 4, _visible_size.height / 6));
+    this->addChild(_progressStackBar);
+    _progressStackBar->set_new_progress_bar(4);
+
 //
 //    _music_percent = 73;
 //    if(_music_percent)
@@ -88,10 +87,11 @@ bool HelloWorld::init()
 //    }
 //
 //    _menuUtils = GUIUtils::create();
-//    _menuUtils->retain();
-//
-//    _background_sprite = _menuUtils->createBackground();
-//    this->addChild(_background_sprite, -1);
+////    _menuUtils->retain();
+////
+    std::string back = "menu/background-clouds.png";
+    _background_sprite = GUIUtils::createBackground(back, _visible_size);
+    this->addChild(_background_sprite, -1);
 //
 //    _header_label = _menuUtils->setHeaderLabel("STRIKE TOWER");
 //    this->addChild(_header_label);

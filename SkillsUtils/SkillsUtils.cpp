@@ -41,11 +41,11 @@ void SkillsUtils::createTable()
             {
                 CCLOG("Error in CREATE TABLE skillsUtils");
             }
-            for(int i = 0; i < _numberOfPlayers; ++i)
-            {
-//                insert(i, DEFAULT_FLYINGSKILL, DEFAULT_MAGNETICSKILL, DEFAULT_ARMORSKILL,
-//                       DEFAULT_DAMAGESKILL, DEFAULT_LUCKMONEYSKILL);
-            }
+//            for(int i = 0; i < _numberOfPlayers; ++i)
+//            {
+////                insert(i, DEFAULT_FLYINGSKILL, DEFAULT_MAGNETICSKILL, DEFAULT_ARMORSKILL,
+////                       DEFAULT_DAMAGESKILL, DEFAULT_LUCKMONEYSKILL);
+//            }
         }
 
         sqlite3_reset(stmt);
