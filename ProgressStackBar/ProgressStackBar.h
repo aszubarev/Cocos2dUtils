@@ -7,17 +7,17 @@ USING_NS_CC;
 class ProgressStackBar : public Sprite
 {
 public:
-    ProgressStackBar(std::string &emptyBall, std::string &yellowBall,
+    ProgressStackBar(const std::string &emptyCellFile, const std::string &filledCellFile,
                      int currentLevel, int maxLevel);
     ~ProgressStackBar();
 
-    static ProgressStackBar *create(std::string &emptyBall, std::string &yellowBall,
+    static ProgressStackBar *create(const std::string &emptyCellFile, const std::string &filledCellFile,
                                     int currentLevel, int maxLevel);
 
     bool increment();
     bool decrement();
     bool updateStructure(int currentLevel, int maxLevel);
-    bool updateCurrentLevel(int currentLevel);
+    void updateCurrentLevel(int currentLevel);
 
     int getCurrentLevel();
     int getMaxLevel();
@@ -31,7 +31,7 @@ private:
     float _gap;
     float _step;
 
-    bool init(int currentLevel, int maxLevel);
+    void init(int currentLevel, int maxLevel);
 
     std::string prefix_err_create_sprite;
     std::string prefix_err_bad_argument;

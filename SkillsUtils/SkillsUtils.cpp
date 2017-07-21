@@ -10,7 +10,7 @@ SkillsUtils* SkillsUtils::getInstance()
 }
 
 SkillsUtils::SkillsUtils():
-        _atrTableName("AppSkills"), _atrPlayerId("playerId"), _atrFlyingSkill("flyingSkill"),
+        _tableName("AppSkills"), _atrPlayerId("playerId"), _atrFlyingSkill("flyingSkill"),
         _atrMagneticSkill("magneticSkill"), _atrArmorSkill("armorSkill"), _atrDamageSkill("damageSkill"),
         _atrLuckMoneySkill("luckMoneySkill")
 {
@@ -30,7 +30,7 @@ void SkillsUtils::createTable()
     if (_dbUtils->open())
     {
         sqlite3_stmt* stmt;
-        std::string sql = "CREATE TABLE IF NOT EXISTS " + _atrTableName + "(" +
+        std::string sql = "CREATE TABLE IF NOT EXISTS " + _tableName + "(" +
                 _atrPlayerId + " INTEGER PRIMARY KEY, " + _atrFlyingSkill + " INTEGER, " +
                 _atrMagneticSkill + " INTEGER, " + _atrArmorSkill + " INTEGER, " +
                 _atrDamageSkill + " INTEGER, " + _atrLuckMoneySkill + " INTEGER);";
@@ -49,12 +49,13 @@ void SkillsUtils::createTable()
     }
 }
 
-void SkillsUtils::insert_row(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill)
+void SkillsUtils::insert_row(int playerId, int flyingSkill, int magneticSkill,
+                             int armorSkill, int damageSkill, int luckMoneySkill)
 {
     _dbUtils->open();
     sqlite3_stmt* stmt;
     std::string playerIdStr = StringUtils::toString(playerId);
-    std::string query = "INSERT INTO " + _atrTableName + " VALUES(" +
+    std::string query = "INSERT INTO " + _tableName + " VALUES(" +
             playerIdStr + ", ?, ?, ?, ?, ?);";
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -84,7 +85,7 @@ void SkillsUtils::deleteLine(int playerId)
     _dbUtils->open();
     sqlite3_stmt* stmt;
     std::string playerIdStr = StringUtils::toString(playerId);
-    std::string query = "delete from " + _atrTableName +  " where " + _atrPlayerId + "=" + playerIdStr;
+    std::string query = "delete from " + _tableName +  " where " + _atrPlayerId + "=" + playerIdStr;
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {
@@ -104,7 +105,7 @@ bool SkillsUtils::setOneAtribute(int playerId, std::string &atribute, int newAmo
     _dbUtils->open();
     sqlite3_stmt* stmt;
     std::string playerIdStr = StringUtils::toString(playerId);
-    std::string query = "UPDATE " + _atrTableName + " set " + atribute + "=? where " + _atrPlayerId +
+    std::string query = "UPDATE " + _tableName + " set " + atribute + "=? where " + _atrPlayerId +
                          "=" + playerIdStr + ";";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
@@ -208,7 +209,8 @@ bool SkillsUtils::setLuckMoneySkill(int playerId, int luckMoneySkill)
     }
 }
 
-bool SkillsUtils::setAllAtributes(int playerId, int flyingSkill, int magneticSkill, int armorSkill, int damageSkill, int luckMoneySkill)
+bool SkillsUtils::setAllAtributes(int playerId, int flyingSkill, int magneticSkill,
+                                  int armorSkill, int damageSkill, int luckMoneySkill)
 {
     bool flag = true;
     bool result = true;
@@ -247,8 +249,8 @@ std::string SkillsUtils::getOneAtribute(int playerId, std::string &atribute)
     sqlite3_stmt* stmt;
     std::string result;
     std::string playerIdStr = StringUtils::toString(playerId);
-    std::string query = "SELECT " + atribute + " from " + _atrTableName + " where " + _atrPlayerId +
-            "=" + playerIdStr + ";";
+    std::string query = "SELECT " + atribute + " from " + _tableName + " where " + _atrPlayerId +
+                        "=" + playerIdStr + ";";
 
     if (sqlite3_prepare_v2(_dbUtils->db(), query.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
     {

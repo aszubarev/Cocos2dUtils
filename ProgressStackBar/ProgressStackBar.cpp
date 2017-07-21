@@ -1,37 +1,33 @@
 #include "ProgressStackBar.h"
 #include "../ImageUtils/ImageUtils.h"
 
-ProgressStackBar::ProgressStackBar(std::string &emptyCellFile, std::string &filledCellFile,
+ProgressStackBar::ProgressStackBar(const std::string &emptyCellFile, const std::string &filledCellFile,
                                    int currentLevel, int maxLevel):
                     _emptyCellFile(emptyCellFile), _filledCellFile(filledCellFile),
-                                _currentLevel(currentLevel), _maxLevel(maxLevel)
+                    _currentLevel(currentLevel), _maxLevel(maxLevel)
 {
-    prefix_err_create_sprite = "ERROR: Can not open ";
-    prefix_err_bad_argument = "ERROR: bad argument";
+    prefix_err_create_sprite = "Can't create from ";
 
     _cellSize = ImageUtils::getSize(_emptyCellFile);
 
     _gap = _cellSize.width / 4;
     _step = _gap + _cellSize.width;
-
-    if(!init(_currentLevel, maxLevel))
-    {
-        CCLOG("Error in PROGRESSSTACKBAR INIT");
-    }
+    init(_currentLevel, _maxLevel);
 }
 
 ProgressStackBar::~ProgressStackBar()
 {}
 
-ProgressStackBar *ProgressStackBar::create(std::string &emptyCellFile, std::string &filledCellFile,
+ProgressStackBar *ProgressStackBar::create(const std::string &emptyCellFile, const std::string &filledCellFile,
                                            int currentLevel, int maxLevel)
 {
-    ProgressStackBar *progressStackBar = new (std::nothrow) ProgressStackBar(emptyCellFile, filledCellFile, currentLevel, maxLevel);
+    ProgressStackBar *progressStackBar = new (std::nothrow) ProgressStackBar(emptyCellFile, filledCellFile,
+                                                                             currentLevel, maxLevel);
     progressStackBar->autorelease();
     return progressStackBar;
 }
 
-bool ProgressStackBar::init(int currentLevel, int maxLevel)
+void ProgressStackBar::init(int currentLevel, int maxLevel)
 {
     _currentLevel = currentLevel;
     _maxLevel = maxLevel;
@@ -58,47 +54,40 @@ bool ProgressStackBar::init(int currentLevel, int maxLevel)
         cell->setPosition(Vec2(_step * i, 0));
         this->addChild(cell);
     }
-    return true;
 }
 
-bool ProgressStackBar::updateCurrentLevel(int currentLevel)
+void ProgressStackBar::updateCurrentLevel(int currentLevel)
 {
     if(currentLevel < 0 || currentLevel > _maxLevel)
     {
-        throw std::invalid_argument(prefix_err_bad_argument);
+        std::string err = StringUtils::format("Can't call updateCurrentLevel(int param):\n"
+                                                      "param = %d\nmaxParam = %d\n", currentLevel, _maxLevel);
+        throw std::invalid_argument(err);
     }
     removeAllChildren();
-    return init(currentLevel, _maxLevel);
+    init(currentLevel, _maxLevel);
 }
 
 bool ProgressStackBar::increment()
 {
-    if(_currentLevel >= _maxLevel)
-    {
-        throw std::invalid_argument(prefix_err_create_sprite);
-    }
+    if(_currentLevel >= _maxLevel) { return false; }
     removeAllChildren();
-    return init(++_currentLevel, _maxLevel);
+    init(++_currentLevel, _maxLevel);
+    return true;
 }
 
 bool ProgressStackBar::decrement()
 {
-    if(_currentLevel <= 0)
-    {
-        throw std::invalid_argument(prefix_err_bad_argument);
-    }
+    if(_currentLevel <= 0) { return false; }
     removeAllChildren();
-    return init(--_currentLevel, _maxLevel);
+    init(--_currentLevel, _maxLevel);
+    return true;
 }
 
 bool ProgressStackBar::updateStructure(int currentLevel, int maxLevel)
 {
-    if(currentLevel < 0 || currentLevel > _maxLevel)
-    {
-        throw std::invalid_argument(prefix_err_bad_argument);
-    }
     removeAllChildren();
-    return init(currentLevel, maxLevel);
+    init(currentLevel, maxLevel);
 }
 
 int ProgressStackBar::getCurrentLevel()

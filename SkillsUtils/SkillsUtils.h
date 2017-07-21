@@ -33,7 +33,7 @@ public:
 
 private:
     DataBaseUtils *_dbUtils;
-    std::string _atrTableName;
+    std::string _tableName;
     std::string _atrPlayerId;
     std::string _atrFlyingSkill;
     std::string _atrMagneticSkill;
