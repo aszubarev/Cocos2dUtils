@@ -77,8 +77,11 @@ bool HelloWorld::init()
     _progressStackBar->retain();
     _progressStackBar->setPosition(Vec2(_visible_size.width / 4, _visible_size.height / 6));
     this->addChild(_progressStackBar);
-    _progressStackBar->set_new_progress_bar(4);
-
+    _progressStackBar->increment();
+    _progressStackBar->increment();
+    _progressStackBar->increment();
+    _progressStackBar->decrement();
+    
 //
 //    _music_percent = 73;
 //    if(_music_percent)

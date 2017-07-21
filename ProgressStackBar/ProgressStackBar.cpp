@@ -1,15 +1,24 @@
 #include "ProgressStackBar.h"
+#include "../ImageUtils/ImageUtils.h"
 
-ProgressStackBar::ProgressStackBar(std::string &emptyBall, std::string &yellowBall,
+ProgressStackBar::ProgressStackBar(std::string &emptyCellFileName, std::string &filledCellFileName,
                                    int currentLevel, int maxLevel):
-                                _emptyBall(emptyBall), _yellowBall(yellowBall),
+                    _emptyCellFileName(emptyCellFileName), _filledCellFileName(filledCellFileName),
                                 _currentLevel(currentLevel), _maxLevel(maxLevel)
 {
-    _emptyBallSprite = Sprite::create(_emptyBall);
-    _yellowBallSprite = Sprite::create(_yellowBall);
-    _ballSize = _emptyBallSprite->getContentSize();
-    _gap = _ballSize.width + _ballSize.width / 4;
-    
+    prefix_err_create_sprite = "ERROR: Can not open ";
+    try
+    {
+        _cellSize = ImageUtils::getSize(_emptyCellFileName);
+    }
+    catch(std::invalid_argument &a)
+    {
+        CCLOG("Error in PROGRESSSTACKBAR constructor");
+    }
+
+    _gap = _cellSize.width / 4;
+    _step = _gap + _cellSize.width;
+
     if(!init(_currentLevel, maxLevel))
     {
         CCLOG("Error in PROGRESSSTACKBAR INIT");
@@ -19,43 +28,68 @@ ProgressStackBar::ProgressStackBar(std::string &emptyBall, std::string &yellowBa
 ProgressStackBar::~ProgressStackBar()
 {}
 
-ProgressStackBar *ProgressStackBar::create(std::string &emptyBall, std::string &yellowBall,
+ProgressStackBar *ProgressStackBar::create(std::string &emptyCellFileName, std::string &filledCellFileName,
             int currentLevel, int maxLevel)
 {
-    ProgressStackBar *progressStackBar = new (std::nothrow) ProgressStackBar(emptyBall, yellowBall, currentLevel, maxLevel);
+    ProgressStackBar *progressStackBar = new (std::nothrow) ProgressStackBar(emptyCellFileName, filledCellFileName, currentLevel, maxLevel);
     progressStackBar->autorelease();
     return progressStackBar;
 }
 
-bool ProgressStackBar::init(int newCurrentLevel, int newMaxLevel)
+bool ProgressStackBar::init(int currentLevel, int maxLevel)
 {
-    _currentLevel = newCurrentLevel;
-    _maxLevel = newMaxLevel;
+    _currentLevel = currentLevel;
+    _maxLevel = maxLevel;
 
     //yellow balls
     for(int i = 0; i < _currentLevel; ++i)
     {
-        Sprite *clonedBall = Sprite::createWithTexture(_yellowBallSprite->getTexture());
-        //startPosition.x - позиция первого
-        //_gap - расстояние между центрами шаров
-        //_gap * i расстояние от центра первого шара до центра текущего шара
-        clonedBall->setPosition(Vec2(_gap * i, 0));
-        this->addChild(clonedBall);
+        Sprite *cell = Sprite::create(_filledCellFileName);
+        if(cell == nullptr)
+        {
+            throw std::invalid_argument(prefix_err_create_sprite + _filledCellFileName);
+        }
+        cell->setPosition(Vec2(_step * i, 0));
+        this->addChild(cell);
     }
     //empty balls
     for(int i = _currentLevel; i < _maxLevel; ++i)
     {
-        Sprite *clonedBall = Sprite::createWithTexture(_emptyBallSprite->getTexture());
-        clonedBall->setPosition(Vec2(_gap * i, 0));
-        this->addChild(clonedBall);
+        Sprite *cell = Sprite::create(_emptyCellFileName);
+        if(cell == nullptr)
+        {
+            throw std::invalid_argument(prefix_err_create_sprite + _filledCellFileName);
+        }
+        cell->setPosition(Vec2(_step * i, 0));
+        this->addChild(cell);
     }
     return true;
 }
 
-bool ProgressStackBar::set_new_progress_bar(int newLevel)
+bool ProgressStackBar::update_current_level(int currentLevel)
 {
     removeAllChildren();
 
-    return init(newLevel, _maxLevel);
+    return init(currentLevel, _maxLevel);
 }
 
+bool ProgressStackBar::increment()
+{
+    removeAllChildren();
+
+    return init(++_currentLevel, _maxLevel);
+}
+
+bool ProgressStackBar::decrement()
+{
+    removeAllChildren();
+
+    return init(--_currentLevel, _maxLevel);
+}
+
+bool ProgressStackBar::update_structure(int currentLevel, int maxLevel)
+{
+    removeAllChildren();
+
+    return init(currentLevel, maxLevel);
+}

@@ -1,7 +1,7 @@
 #ifndef COCOS2DUTILS_PROGRESSSTACKBAR_H
 #define COCOS2DUTILS_PROGRESSSTACKBAR_H
 #include "cocos2d.h"
-
+#include <stdexcept>
 USING_NS_CC;
 
 class ProgressStackBar : public Sprite
@@ -14,20 +14,23 @@ public:
     static ProgressStackBar *create(std::string &emptyBall, std::string &yellowBall,
                     int currentLevel, int maxLevel);
 
-    bool set_new_progress_bar(int newLevel);
-
+    bool increment();
+    bool decrement();
+    bool update_structure(int newCurrentLevel, int newMaxLevel);
 private:
-    std::string _emptyBall;
-    std::string _yellowBall;
+    std::string _emptyCellFileName;
+    std::string _filledCellFileName;
     int _currentLevel;
     int _maxLevel;
 
-    Sprite *_emptyBallSprite;
-    Sprite *_yellowBallSprite;
-    Size _ballSize;
+    Size _cellSize;
     float _gap;
+    float _step;
 
-    bool init(int newCurrentLevel, int newMaxLevel);
+    bool init(int currentLevel, int maxLevel);
+    bool update_current_level(int currentLevel);
+
+    std::string prefix_err_create_sprite;
 };
 
 
