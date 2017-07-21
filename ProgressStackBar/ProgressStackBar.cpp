@@ -5,6 +5,11 @@ ProgressStackBar::ProgressStackBar(std::string &emptyBall, std::string &yellowBa
                                 _emptyBall(emptyBall), _yellowBall(yellowBall),
                                 _currentLevel(currentLevel), _maxLevel(maxLevel)
 {
+    _emptyBallSprite = Sprite::create(_emptyBall);
+    _yellowBallSprite = Sprite::create(_yellowBall);
+    _ballSize = _emptyBallSprite->getContentSize();
+    _gap = _ballSize.width + _ballSize.width / 4;
+    
     if(!init(_currentLevel, maxLevel))
     {
         CCLOG("Error in PROGRESSSTACKBAR INIT");
@@ -26,10 +31,6 @@ bool ProgressStackBar::init(int newCurrentLevel, int newMaxLevel)
 {
     _currentLevel = newCurrentLevel;
     _maxLevel = newMaxLevel;
-    _emptyBallSprite = Sprite::create(_emptyBall);
-    _yellowBallSprite = Sprite::create(_yellowBall);
-    _ballSize = _emptyBallSprite->getContentSize();
-    _gap = _ballSize.width + _ballSize.width / 4;
 
     //yellow balls
     for(int i = 0; i < _currentLevel; ++i)
