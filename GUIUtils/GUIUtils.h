@@ -54,32 +54,33 @@ namespace GUIUtils
     Sprite *createBackground(const std::string &background, Size &visibleSize);
 
     //Label
-    Label *createLable(const std::string &text, LabelStyle &labelStyle);
+    Label *createLabel(const std::string &text, LabelStyle &labelStyle);
+    Label *createLabel(const std::string &text, const Vec2 &position, LabelStyle &labelStyle);
     void setStyleLabel(Label *label, LabelStyle &labelStyle);
 
     //Menu label
-    Menu *createMenuLabel(const std::string &text, Vec2 &position,
+    Menu *createMenuLabel(const std::string &text, const Vec2 &position,
                                 LabelStyle &labelStyle, const ccMenuCallback &callback);
-    Menu *createMenu(Label *label, Vec2 &position, const ccMenuCallback &callback);
+    Menu *createMenu(Label *label, const Vec2 &position, const ccMenuCallback &callback);
 
     //Slider
     ui::Slider *createSlider(const std::string &fileNameBar,    // Background of slider
-                                    const std::string &fileNameBall,   // Ball of slider
-                                    const std::string &fileNameLine,   // Line of slider
-                                    int percent, Vec2 &position,
-                                    const ui::Slider::ccSliderCallback &callback);
+                             const std::string &fileNameBall,   // Ball of slider
+                             const std::string &fileNameLine,   // Line of slider
+                             int percent, const Vec2 &position,
+                             const ui::Slider::ccSliderCallback &callback);
     //CheckBox
     ui::CheckBox *createCheckBox(const std::string& backGround, const std::string& cross,
-                                        Vec2 position, bool is_active,
-                                        const ui::CheckBox::ccCheckBoxCallback &callback);
+                                 const Vec2 &position, bool is_active,
+                                 const ui::CheckBox::ccCheckBoxCallback &callback);
 
     //Button
-    ui::Button * createButton(const std::string &button, Vec2 position,
-                                     const ui::Widget::ccWidgetTouchCallback &callback);
+    ui::Button * createButton(const std::string &button, const Vec2 &position,
+                              const ui::Widget::ccWidgetTouchCallback &callback);
 
     ui::Button * createButtonWithTitle(const std::string &button, const std::string &tilte,
-                                              Vec2 position, TitletStyle &tileStyle,
-                                              const ui::Widget::ccWidgetTouchCallback &callback);
+                                       const Vec2 &position, TitletStyle &tileStyle,
+                                       const ui::Widget::ccWidgetTouchCallback &callback);
 };
 
 
