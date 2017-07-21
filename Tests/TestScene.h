@@ -5,6 +5,8 @@
 #include "../cocos2d/external/sqlite3/include/sqlite3.h"
 #include "../SettingsUtils/SettingsUtils.h"
 #include "../GUIUtils/GUIUtils.h"
+#include "../SkillsUtils/SkillsUtils.h"
+#include "../ProgressStackBar/ProgressStackBar.h"
 
 class HelloWorld : public cocos2d::Layer
 {
@@ -29,6 +31,10 @@ private:
     Vec2 _origin;
 
     SettingsUtils *_settingUtils;
+
+    SkillsUtils *_skillsUtils;
+
+    ProgressStackBar *_progressStackBar;
 
     char* errorMessage;
     cocos2d::Layer *_layer;

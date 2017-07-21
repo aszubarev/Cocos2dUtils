@@ -13,6 +13,8 @@ HelloWorld::HelloWorld(): errorMessage()
 HelloWorld::~HelloWorld()
 {
     CC_SAFE_RELEASE_NULL(_settingUtils);
+    CC_SAFE_RELEASE_NULL(_skillsUtils);
+    CC_SAFE_RELEASE_NULL(_progressStackBar);
 }
 
 Scene* HelloWorld::createScene()
@@ -62,7 +64,23 @@ bool HelloWorld::init()
         std::cout << "UNKNOWN ERROR" << std::endl;
     }
 
+//    Vec2 pos = Vec2(_visible_size.width/2, _visible_size.height/6);
+//    ui::Slider* sl = GUIUtils::createSlider("slider/slider.png", "slider/transparentPoint.png",
+//                        "slider/balls.png",
+//                        10, pos,
+//                        CC_CALLBACK_2(HelloWorld::callbackSliderEffect, this));
+//    this->addChild(sl);
 
+    std::string emptyBall = "progressStackBar/emptyBall.png";
+    std::string yellowBall = "progressStackBar/filledBall.png";
+    _progressStackBar = ProgressStackBar::create(emptyBall, yellowBall, 3, 8);
+    _progressStackBar->retain();
+    _progressStackBar->setPosition(Vec2(_visible_size.width / 4, _visible_size.height / 6));
+    this->addChild(_progressStackBar);
+    _progressStackBar->increment();
+    _progressStackBar->increment();
+    _progressStackBar->increment();
+    _progressStackBar->decrement();
 
 //
 //    _music_percent = 73;
@@ -72,10 +90,11 @@ bool HelloWorld::init()
 //    }
 //
 //    _menuUtils = GUIUtils::create();
-//    _menuUtils->retain();
-//
-//    _background_sprite = _menuUtils->createBackground();
-//    this->addChild(_background_sprite, -1);
+////    _menuUtils->retain();
+////
+    std::string back = "menu/background-clouds.png";
+    _background_sprite = GUIUtils::createBackground(back, _visible_size);
+    this->addChild(_background_sprite, -1);
 //
 //    _header_label = _menuUtils->setHeaderLabel("STRIKE TOWER");
 //    this->addChild(_header_label);
@@ -109,6 +128,10 @@ bool HelloWorld::init()
 //    _settingUtils->setVolumeEffect(23);
 //    std::cout << _settingUtils->getVolumeEffect();
 
+    _skillsUtils = SkillsUtils::getInstance();
+    _skillsUtils->retain();
+    _skillsUtils->setArmorSkill(2, 7);
+    std::cout << _skillsUtils->getDamageSkill(3);
     return true;
 }
 
