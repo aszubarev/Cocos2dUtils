@@ -16,10 +16,14 @@ public:
 
     bool increment();
     bool decrement();
-    bool update_structure(int newCurrentLevel, int newMaxLevel);
+    bool updateStructure(int currentLevel, int maxLevel);
+    bool updateCurrentLevel(int currentLevel);
+
+    int getCurrentLevel();
+    int getMaxLevel();
 private:
-    std::string _emptyCellFileName;
-    std::string _filledCellFileName;
+    std::string _emptyCellFile;
+    std::string _filledCellFile;
     int _currentLevel;
     int _maxLevel;
 
@@ -28,7 +32,6 @@ private:
     float _step;
 
     bool init(int currentLevel, int maxLevel);
-    bool update_current_level(int currentLevel);
 
     std::string prefix_err_create_sprite;
     std::string prefix_err_bad_argument;
