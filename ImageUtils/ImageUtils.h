@@ -8,6 +8,7 @@ class ImageUtils
 {
 public:
     static Size getSize(const std::string &filename);
+    static bool isExist(const std::string &filename);
 
 private:
     static std::string prefix_err_create_sprite;

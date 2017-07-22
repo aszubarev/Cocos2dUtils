@@ -1,4 +1,5 @@
 #include "GUIUtils.h"
+#include "../ImageUtils/ImageUtils.h"
 #include <iostream>
 
 Sprite *GUIUtils::createBackground(const std::string &background, Size &visibleSize)

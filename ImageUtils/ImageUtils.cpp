@@ -12,3 +12,10 @@ Size ImageUtils::getSize(const std::string &filename)
 
     return sprite->getContentSize();
 }
+
+bool ImageUtils::isExist(const std::string &filename)
+{
+    Sprite *sprite = Sprite::create(filename);
+    if(sprite == nullptr) { return false; }
+    return true;
+}
