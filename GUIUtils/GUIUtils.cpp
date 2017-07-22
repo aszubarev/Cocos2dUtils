@@ -70,13 +70,19 @@ ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Backg
                                    const std::string &fileNameBall,     // Ball of slider
                                    const std::string &fileNameLine,     // Line of slider
                                    int percent, const Vec2 &position,
-                                   const ui::Slider::ccSliderCallback &callback)
+                                   const ui::Slider::ccSliderCallback &callback,
+                                   float scaleFactor)
 {
     ui::Slider *slider = ui::Slider::create(fileNameBar, fileNameBall);
-    if (slider == nullptr)
+    if (slider == nullptr || ImageUtils::isExist(fileNameLine) == false)
     {
-        std::string err = StringUtils::format("Can't create slider:\nfileNameBar = %s\nfileNameBall = %s\n",
-                                              fileNameBar.c_str(), fileNameBall.c_str());
+        std::string err = StringUtils::format("Can't create slider:\n"
+                                                      "fileNameBar = %s\n"
+                                                      "fileNameBall = %s\n"
+                                                      "fileNameLine = %s\n",
+                                              fileNameBar.c_str(),
+                                              fileNameBall.c_str(),
+                                              fileNameLine.c_str());
         throw std::invalid_argument(err);
     }
     slider->setPosition(position);
@@ -84,11 +90,21 @@ ui::Slider *GUIUtils::createSlider(const std::string &fileNameBar,      // Backg
 
     slider->loadProgressBarTexture(fileNameLine);
     slider->setPercent(percent);
+    slider->setScale(scaleFactor);
     return slider;
 }
 
-ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross, const Vec2 &position,
-                                        bool is_active, const ui::CheckBox::ccCheckBoxCallback &callback)
+ui::Slider *GUIUtils::createSlider(SliderStyle &style, int percent, const Vec2 &position,
+                                   const ui::Slider::ccSliderCallback &callback, float scaleFactor)
+{
+    return createSlider(style.fileBar, style.fileBall, style.fileLine,
+                        percent, position, callback, scaleFactor);
+}
+
+ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std::string& cross,
+                                        const Vec2 &position, bool is_active,
+                                        const ui::CheckBox::ccCheckBoxCallback &callback,
+                                        float scaleFactor)
 {
     ui::CheckBox *check_box = ui::CheckBox::create(backGround, cross);
     if (check_box == nullptr)
@@ -100,8 +116,19 @@ ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std
     check_box->setPosition(position);
     check_box->setSelected(is_active);
     check_box->addEventListener(callback);
+    check_box->setScale(scaleFactor);
 
     return check_box;
+}
+
+
+ui::CheckBox *GUIUtils::createCheckBox(CheckBoxStyle &style,
+                                       const Vec2 &position, bool is_active,
+                                       const ui::CheckBox::ccCheckBoxCallback &callback,
+                                       float scaleFactor)
+{
+    return createCheckBox(style.fileBackGround, style.fileCross,
+                          position, is_active, callback, scaleFactor);
 }
 
 void GUIUtils::setupButton(ui::Button *button, const Vec2 &position,
