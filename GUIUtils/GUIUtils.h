@@ -48,6 +48,26 @@ struct TitletStyle
     const Color3B color;
 };
 
+struct SliderStyle
+{
+    SliderStyle(const std::string &pFileBar,
+                const std::string &pFileBall,
+                const std::string &pFileLine);
+
+    const std::string fileBar;
+    const std::string fileBall;
+    const std::string fileLine;
+};
+
+struct CheckBoxStyle
+{
+    CheckBoxStyle(const std::string& pFileBackGround,
+                  const std::string& pFileCross);
+
+    const std::string fileBackGround;
+    const std::string fileCross;
+};
+
 namespace GUIUtils
 {
     //Background
@@ -64,15 +84,26 @@ namespace GUIUtils
     Menu *createMenu(Label *label, const Vec2 &position, const ccMenuCallback &callback);
 
     //Slider
+    ui::Slider *createSlider(SliderStyle &style, int percent, const Vec2 &position,
+                             const ui::Slider::ccSliderCallback &callback,
+                             float scaleFactor = 1.0f);
+
     ui::Slider *createSlider(const std::string &fileNameBar,    // Background of slider
                              const std::string &fileNameBall,   // Ball of slider
                              const std::string &fileNameLine,   // Line of slider
                              int percent, const Vec2 &position,
-                             const ui::Slider::ccSliderCallback &callback);
+                             const ui::Slider::ccSliderCallback &callback,
+                             float scaleFactor = 1.0f);
     //CheckBox
+    ui::CheckBox *createCheckBox(CheckBoxStyle &style,
+                                 const Vec2 &position, bool is_active,
+                                 const ui::CheckBox::ccCheckBoxCallback &callback,
+                                 float scaleFactor = 1.0f);
+
     ui::CheckBox *createCheckBox(const std::string& backGround, const std::string& cross,
                                  const Vec2 &position, bool is_active,
-                                 const ui::CheckBox::ccCheckBoxCallback &callback);
+                                 const ui::CheckBox::ccCheckBoxCallback &callback,
+                                 float scaleFactor = 1.0f);
 
     //Button
     void setupButton(ui::Button *button, const Vec2 &position,
