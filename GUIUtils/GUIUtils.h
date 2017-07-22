@@ -76,7 +76,8 @@ namespace GUIUtils
 
     //Button
     void setupButton(ui::Button *button, const Vec2 &position,
-                     const ui::Widget::ccWidgetTouchCallback &callback);
+                     const ui::Widget::ccWidgetTouchCallback &callback,
+                     float scaleFactor = 1.0f);
 
     ui::Button * createButton(const std::string &button, const Vec2 &position,
                               const ui::Widget::ccWidgetTouchCallback &callback);

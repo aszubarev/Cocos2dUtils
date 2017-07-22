@@ -105,10 +105,12 @@ ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std
 }
 
 void GUIUtils::setupButton(ui::Button *button, const Vec2 &position,
-                           const ui::Widget::ccWidgetTouchCallback &callback)
+                           const ui::Widget::ccWidgetTouchCallback &callback,
+                           float scaleFactor)
 {
     button->setPosition(position);
     button->addTouchEventListener(callback);
+    button->setScale(scaleFactor);
 }
 
 ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &position,
