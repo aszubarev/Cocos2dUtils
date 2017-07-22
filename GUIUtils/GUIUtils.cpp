@@ -201,3 +201,17 @@ TitletStyle::TitletStyle(float pSize, const std::string &pfontName, const Color3
         fontName(pfontName),
         color(pColor)
 {}
+
+SliderStyle::SliderStyle(const std::string &pFileBar,
+                         const std::string &pFileBall,
+                         const std::string &pFileLine):
+        fileBar(pFileBar),
+        fileBall(pFileBall),
+        fileLine(pFileLine)
+{}
+
+CheckBoxStyle::CheckBoxStyle(const std::string &pFileBackGround,
+                             const std::string &pFileCross):
+        fileBackGround(pFileBackGround),
+        fileCross(pFileCross)
+{}
