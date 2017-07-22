@@ -75,6 +75,9 @@ namespace GUIUtils
                                  const ui::CheckBox::ccCheckBoxCallback &callback);
 
     //Button
+    void setupButton(ui::Button *button, const Vec2 &position,
+                     const ui::Widget::ccWidgetTouchCallback &callback);
+
     ui::Button * createButton(const std::string &button, const Vec2 &position,
                               const ui::Widget::ccWidgetTouchCallback &callback);
 

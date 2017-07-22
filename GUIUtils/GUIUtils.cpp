@@ -104,6 +104,13 @@ ui::CheckBox * GUIUtils::createCheckBox(const std::string& backGround, const std
     return check_box;
 }
 
+void GUIUtils::setupButton(ui::Button *button, const Vec2 &position,
+                           const ui::Widget::ccWidgetTouchCallback &callback)
+{
+    button->setPosition(position);
+    button->addTouchEventListener(callback);
+}
+
 ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &position,
                                    const ui::Widget::ccWidgetTouchCallback &callback)
 {
@@ -113,10 +120,7 @@ ui::Button *GUIUtils::createButton(const std::string &button, const Vec2 &positi
         std::string err = "Can't create Button from " + button;
         throw std::invalid_argument(err);
     }
-
-    btn->setPosition(position);
-    btn->addTouchEventListener(callback);
-
+    setupButton(btn, position, callback);
     return btn;
 }
 
