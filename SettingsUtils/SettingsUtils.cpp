@@ -249,18 +249,18 @@ std::string SettingsUtils::getOneAtribute(std::string &atribute)
 
 int SettingsUtils::getVolumeEffect()
 {
-    return stoi(getOneAtribute(_atrVolumeEffect));
+    return Value(getOneAtribute(_atrVolumeEffect)).asInt();
 }
 int SettingsUtils::getVolumeSound()
 {
-    return stoi(getOneAtribute(_atrVolumeSound));
+    return Value(getOneAtribute(_atrVolumeSound)).asInt();
 }
 int SettingsUtils::getLanguages()
 {
-    return stoi(getOneAtribute(_atrLanguages));
+    return Value(getOneAtribute(_atrLanguages)).asInt();
 }
 
 int SettingsUtils::getVibroEnable()
 {
-    return stoi(getOneAtribute(_atrVibroEnable));
+    return Value(getOneAtribute(_atrVibroEnable)).asInt();
 }
